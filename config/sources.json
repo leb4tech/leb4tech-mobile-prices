@@ -6,7 +6,7 @@
       "owner": "Google LLC",
       "host": "store.google.com",
       "country": "US",
-      "enabled": true,
+      "enabled": false,
       "permission_confirmed": true,
       "permission_url": "https://store.google.com/robots.txt",
       "reviewed_at": "2026-10-23T20:41:25.131018+00:00",
