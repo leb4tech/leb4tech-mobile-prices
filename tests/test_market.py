@@ -53,7 +53,7 @@ class MarketTests(unittest.TestCase):
         validate(replace(BASE, observed_at=NOW-timedelta(hours=5, minutes=59)), NOW)
 
     def test_source_validation(self):
-        for source in (replace(A, country='US'), replace(A, permission_reference='')):
+        for source in (replace(A, country='XX'), replace(A, permission_reference='')):
             with self.assertRaises(ValueError):
                 validate(replace(BASE, source=source), NOW)
         for url in ('http://a.example/p', 'https://other.example/p', 'https://u:p@a.example/p'):

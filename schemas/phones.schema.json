@@ -1,195 +1,429 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "schema_version",
-    "updated_at",
-    "phones"
-  ],
-  "properties": {
-    "schema_version": {
-      "const": 1
-    },
-    "updated_at": {
-      "anyOf": [
-        {
-          "type": "string",
-          "format": "date-time"
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "updated_at",
+        "phones"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
         },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "phones": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "brand",
-          "model",
-          "storage_gb",
-          "ram_gb",
-          "sim",
-          "warranty",
-          "condition",
-          "specs",
-          "image",
-          "average_usd",
-          "status",
-          "updated_at",
-          "offers"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "pattern": "^[a-f0-9]{24}$"
-          },
-          "brand": {
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
-          },
-          "model": {
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
-          },
-          "storage_gb": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "ram_gb": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "minimum": 1
-          },
-          "sim": {
-            "type": "string",
-            "minLength": 1
-          },
-          "warranty": {
-            "type": "string",
-            "minLength": 1
-          },
-          "condition": {
-            "enum": [
-              "new",
-              "used",
-              "refurbished"
-            ]
-          },
-          "specs": {
-            "type": "array",
-            "items": {
+        "updated_at": {
+          "anyOf": [
+            {
               "type": "string",
-              "minLength": 1
+              "format": "date-time"
             },
-            "maxItems": 12
-          },
-          "image": {
-            "anyOf": [
-              {
-                "type": "null"
-              },
-              {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "url",
-                  "permission_url"
-                ],
-                "properties": {
-                  "url": {
-                    "type": "string",
-                    "format": "uri",
-                    "pattern": "^https://"
-                  },
-                  "permission_url": {
-                    "type": "string",
-                    "format": "uri",
-                    "pattern": "^https://"
-                  }
-                }
-              }
-            ]
-          },
-          "average_usd": {
-            "type": [
-              "number",
-              "null"
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "brand",
+              "model",
+              "storage_gb",
+              "ram_gb",
+              "sim",
+              "warranty",
+              "condition",
+              "specs",
+              "image",
+              "average_usd",
+              "status",
+              "updated_at",
+              "offers"
             ],
-            "exclusiveMinimum": 0
-          },
-          "status": {
-            "enum": [
-              "verified",
-              "insufficient_data"
-            ]
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "offers": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "store",
-                "owner",
-                "url",
-                "currency",
-                "price_usd",
-                "available",
-                "condition",
-                "observed_at"
-              ],
-              "properties": {
-                "store": {
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{24}$"
+              },
+              "brand": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
+              },
+              "model": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
+              },
+              "storage_gb": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "ram_gb": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "sim": {
+                "type": "string",
+                "minLength": 1
+              },
+              "warranty": {
+                "type": "string",
+                "minLength": 1
+              },
+              "condition": {
+                "enum": [
+                  "new",
+                  "used",
+                  "refurbished"
+                ]
+              },
+              "specs": {
+                "type": "array",
+                "items": {
                   "type": "string",
                   "minLength": 1
                 },
-                "owner": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "url": {
-                  "type": "string",
-                  "format": "uri",
-                  "pattern": "^https://"
-                },
-                "currency": {
-                  "const": "USD"
-                },
-                "price_usd": {
-                  "type": "number",
-                  "exclusiveMinimum": 0
-                },
-                "available": {
-                  "const": true
-                },
-                "condition": {
-                  "enum": [
-                    "new",
-                    "used",
-                    "refurbished"
-                  ]
-                },
-                "observed_at": {
-                  "type": "string",
-                  "format": "date-time"
+                "maxItems": 12
+              },
+              "image": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "url",
+                      "permission_url"
+                    ],
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https://"
+                      },
+                      "permission_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https://"
+                      }
+                    }
+                  }
+                ]
+              },
+              "average_usd": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0
+              },
+              "status": {
+                "enum": [
+                  "verified",
+                  "insufficient_data"
+                ]
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "offers": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "store",
+                    "owner",
+                    "url",
+                    "currency",
+                    "price_usd",
+                    "available",
+                    "condition",
+                    "observed_at"
+                  ],
+                  "properties": {
+                    "store": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "owner": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https://"
+                    },
+                    "currency": {
+                      "const": "USD"
+                    },
+                    "price_usd": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "available": {
+                      "const": true
+                    },
+                    "condition": {
+                      "enum": [
+                        "new",
+                        "used",
+                        "refurbished"
+                      ]
+                    },
+                    "observed_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
                 }
               }
             }
           }
         }
       }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "updated_at",
+        "phones",
+        "pricing_basis",
+        "currency"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 2
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "brand",
+              "model",
+              "storage_gb",
+              "ram_gb",
+              "sim",
+              "warranty",
+              "condition",
+              "specs",
+              "image",
+              "average_usd",
+              "status",
+              "updated_at",
+              "offers",
+              "market"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{24}$"
+              },
+              "brand": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
+              },
+              "model": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
+              },
+              "storage_gb": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "ram_gb": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "sim": {
+                "type": "string",
+                "minLength": 1
+              },
+              "warranty": {
+                "type": "string",
+                "minLength": 1
+              },
+              "condition": {
+                "enum": [
+                  "new",
+                  "used",
+                  "refurbished"
+                ]
+              },
+              "specs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "maxItems": 12
+              },
+              "image": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "url",
+                      "permission_url"
+                    ],
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https://"
+                      },
+                      "permission_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https://"
+                      }
+                    }
+                  }
+                ]
+              },
+              "average_usd": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "exclusiveMinimum": 0
+              },
+              "status": {
+                "enum": [
+                  "verified",
+                  "insufficient_data"
+                ]
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "offers": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "store",
+                    "owner",
+                    "url",
+                    "currency",
+                    "price_usd",
+                    "available",
+                    "condition",
+                    "observed_at",
+                    "country"
+                  ],
+                  "properties": {
+                    "store": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "owner": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https://"
+                    },
+                    "currency": {
+                      "const": "USD"
+                    },
+                    "price_usd": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "available": {
+                      "const": true
+                    },
+                    "condition": {
+                      "enum": [
+                        "new",
+                        "used",
+                        "refurbished"
+                      ]
+                    },
+                    "observed_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "country": {
+                      "enum": [
+                        "US",
+                        "LB",
+                        "GB",
+                        "CA",
+                        "DE",
+                        "AE",
+                        "AU",
+                        "JP",
+                        "FR"
+                      ]
+                    }
+                  }
+                }
+              },
+              "market": {
+                "enum": [
+                  "US",
+                  "LB",
+                  "GB",
+                  "CA",
+                  "DE",
+                  "AE",
+                  "AU",
+                  "JP",
+                  "FR"
+                ]
+              }
+            }
+          }
+        },
+        "pricing_basis": {
+          "const": "international_retail"
+        },
+        "currency": {
+          "const": "USD"
+        }
+      }
     }
-  }
+  ]
 }

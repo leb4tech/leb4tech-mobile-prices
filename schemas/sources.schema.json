@@ -39,7 +39,17 @@
             "pattern": "^[a-z0-9]+([.-][a-z0-9]+)*\\.[a-z]{2,}$"
           },
           "country": {
-            "const": "LB"
+            "enum": [
+              "US",
+              "LB",
+              "GB",
+              "CA",
+              "DE",
+              "AE",
+              "AU",
+              "JP",
+              "FR"
+            ]
           },
           "enabled": {
             "type": "boolean"
