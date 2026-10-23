@@ -1,5 +1,26 @@
 [
-  {"id":"global-mobile","name":"Global Mobile","kind":"shopify","url":"https://www.globalmobilelb.com","enabled":true},
-  {"id":"privato-mobile","name":"Privato Mobile","kind":"shopify","url":"https://privatomobile.com","enabled":true},
-  {"id":"outgeeked","name":"OutGeeked","kind":"shopify","url":"https://outgeeked.net","enabled":true}
+  {
+    "id": "global-mobile",
+    "name": "Global Mobile",
+    "kind": "shopify",
+    "url": "https://www.globalmobilelb.com",
+    "enabled": false,
+    "review_status": "requires_bot_auth_and_republication_review"
+  },
+  {
+    "id": "privato-mobile",
+    "name": "Privato Mobile",
+    "kind": "shopify",
+    "url": "https://privatomobile.com",
+    "enabled": false,
+    "review_status": "requires_bot_auth_and_republication_review"
+  },
+  {
+    "id": "outgeeked",
+    "name": "OutGeeked",
+    "kind": "shopify",
+    "url": "https://outgeeked.net",
+    "enabled": false,
+    "review_status": "requires_bot_auth_and_republication_review"
+  }
 ]
