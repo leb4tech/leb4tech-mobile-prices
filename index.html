@@ -7,5 +7,13 @@
 <button id="search-btn" type="button">بحث</button><button class="reload" type="button">تحديث البيانات</button>
 <div class="notice" role="status" aria-live="polite">جارٍ تحميل الأسعار الموثّقة…</div><p class="source-status muted" aria-live="polite"></p><p class="summary muted"></p><div class="grid" aria-label="قائمة الهواتف"></div>
 <footer>نعرض سعر المتجر عند توفر عرض واحد، ومتوسطا حسابيا عند توفر متجرين مستقلين للنسخة نفسها وفي السوق نفسه. لا نخلط أسعار دول مختلفة ولا نحول العملات. الأسعار بالدولار كما يعلنها المصدر؛ الشحن والضرائب النهائية تحتاج تحقق لدى المتجر. تحمل الأسعار الأقدم من 6 ساعات تحذيرا. لا توجد علاقة بين هذا المؤشر وأسعار الإطلاق التاريخية.</footer>
+<section class="image-prices" aria-labelledby="image-title">
+<h2 id="image-title">قائمة أسعار من صورة</h2>
+<p>أسماء وأسعار منقولة من قائمة مصورة؛ ليست عروض بيع متحققا منها أو متوسط سوق. الأسماء والاختصارات كما وردت في المصدر.</p>
+<p class="image-meta muted"></p><p class="image-notice notice" aria-live="polite">جار تحميل القائمة المصورة…</p>
+<div class="filters"><label for="image-search">ابحث في القائمة<input id="image-search" type="search" dir="ltr" maxlength="120" placeholder="اسم الهاتف كما في القائمة" /></label><label for="image-brand">القسم في المصدر<select id="image-brand"><option value="">كل الأقسام</option></select></label><label for="image-price">الحد الأقصى بالدولار<input id="image-price" type="number" min="0" step="1" placeholder="دون حد" /></label></div>
+<button class="image-reload" type="button">إعادة تحميل القائمة المصورة</button><p class="image-count muted"></p>
+<div class="image-table-wrap"><table><thead><tr><th scope="col">القسم</th><th scope="col">الاسم كما في الصورة</th><th scope="col">السعر USD</th></tr></thead><tbody></tbody></table></div>
+<p class="image-empty" hidden>لا توجد هواتف مطابقة للبحث.</p></section>
 <noscript>يرجى تفعيل JavaScript لعرض بيانات الهواتف.</noscript></section>
-<script src="assets/app.js" defer></script></body></html>
+<script src="assets/app.js" defer></script><script src="assets/image-prices.js" defer></script></body></html>

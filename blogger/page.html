@@ -1,5 +1,6 @@
 <style>
 .lb4t{direction:rtl;font:16px/1.7 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#171717;background:#fff;max-width:1180px;margin:20px auto;padding:clamp(16px,4vw,40px);border:1px solid #ddd;border-radius:20px;color-scheme:light}.lb4t *{box-sizing:border-box}.lb4t h1{font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.3;margin:10px 0}.lb4t .brandmark{font-size:.9rem;font-weight:800;letter-spacing:.12em}.lb4t .intro{color:#555;max-width:760px}.lb4t .filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;padding:24px 0}.lb4t label{display:block;font-weight:600;font-size:.9rem}.lb4t input,.lb4t select,.lb4t button{font:inherit;width:100%;padding:12px;border:1px solid #aaa;border-radius:8px;background:white;color:#171717;margin-top:6px;min-height:48px}.lb4t button{background:#171717;color:white;cursor:pointer}.lb4t :focus-visible{outline:3px solid #555;outline-offset:3px}.lb4t .notice{padding:14px 18px;border:1px solid #aaa;border-inline-start:4px solid #171717;border-radius:8px;background:#f6f6f6;margin:14px 0;overflow-wrap:anywhere}.lb4t .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:20px;margin-top:24px}.lb4t article{border:1px solid #d8d8d8;border-radius:14px;padding:22px;min-width:0;display:flex;flex-direction:column;gap:10px}.lb4t article h2{font-size:1.15rem;margin:0;line-height:1.5}.lb4t .price{font-size:1.9rem;font-weight:800;margin:4px 0}.lb4t .muted,.lb4t time{color:#555;font-size:.9rem}.lb4t .badge{display:inline-block;border:1px solid #777;border-radius:5px;padding:2px 8px;font-size:.8rem;width:fit-content}.lb4t article img{width:100%;height:180px;object-fit:contain}.lb4t ul{padding-inline-start:22px;margin:0}.lb4t a{color:#171717;text-decoration:underline;text-underline-offset:3px}.lb4t footer{border-top:1px solid #ddd;margin-top:32px;padding-top:20px;font-size:.9rem;color:#555}.lb4t .en{direction:ltr;unicode-bidi:isolate;display:inline-block}.lb4t [hidden]{display:none!important}@media(max-width:650px){.lb4t .filters{grid-template-columns:1fr}.lb4t{margin:8px auto;border-radius:12px}.lb4t .filters{gap:10px;padding:12px 0}}@media(prefers-reduced-motion:reduce){.lb4t *{scroll-behavior:auto!important}}
+.lb4t .image-prices{border-top:2px solid #171717;margin-top:32px;padding-top:20px}.lb4t .image-prices h2{font-size:1.5rem}.lb4t .image-table-wrap{width:100%;overflow-x:auto;margin-top:16px}.lb4t .image-prices table{width:100%;border-collapse:collapse;font-size:.9rem;table-layout:fixed}.lb4t .image-prices th,.lb4t .image-prices td{padding:10px 8px;border-bottom:1px solid #ddd;overflow-wrap:anywhere;text-align:start;vertical-align:top}.lb4t .image-prices th{background:#171717;color:#fff}.lb4t .image-prices th:nth-child(1){width:20%}.lb4t .image-prices th:nth-child(2){width:55%}.lb4t .image-prices th:nth-child(3){width:25%}.lb4t .image-prices tr:nth-child(even){background:#f6f6f6}
 </style>
 <section id="leb4tech-index" class="lb4t" lang="ar" dir="rtl" data-url="https://leb4tech.github.io/leb4tech-mobile-prices/data/global-phones.json">
 <header><div class="brandmark" dir="ltr">Leb4Tech</div><h1>أسعار الهواتف عالميا</h1><p class="intro">أسعار بيع حالية من متاجر دولية، بالدولار الأمريكي USD. كل سعر مرجع تقريبي مرتبط بمتجر وسوق ونسخة محددة، وقد يتغير عند الشراء.</p></header>
@@ -8,6 +9,14 @@
 <button id="search-btn" type="button">بحث</button><button class="reload" type="button">تحديث البيانات</button>
 <div class="notice" role="status" aria-live="polite">جارٍ تحميل الأسعار الموثّقة…</div><p class="source-status muted" aria-live="polite"></p><p class="summary muted"></p><div class="grid" aria-label="قائمة الهواتف"></div>
 <footer>نعرض سعر المتجر عند توفر عرض واحد، ومتوسطا حسابيا عند توفر متجرين مستقلين للنسخة نفسها وفي السوق نفسه. لا نخلط أسعار دول مختلفة ولا نحول العملات. الأسعار بالدولار كما يعلنها المصدر؛ الشحن والضرائب النهائية تحتاج تحقق لدى المتجر. تحمل الأسعار الأقدم من 6 ساعات تحذيرا. لا توجد علاقة بين هذا المؤشر وأسعار الإطلاق التاريخية.</footer>
+<section class="image-prices" aria-labelledby="image-title">
+<h2 id="image-title">قائمة أسعار من صورة</h2>
+<p>أسماء وأسعار منقولة من قائمة مصورة؛ ليست عروض بيع متحققا منها أو متوسط سوق. الأسماء والاختصارات كما وردت في المصدر.</p>
+<p class="image-meta muted"></p><p class="image-notice notice" aria-live="polite">جار تحميل القائمة المصورة…</p>
+<div class="filters"><label for="image-search">ابحث في القائمة<input id="image-search" type="search" dir="ltr" maxlength="120" placeholder="اسم الهاتف كما في القائمة" /></label><label for="image-brand">القسم في المصدر<select id="image-brand"><option value="">كل الأقسام</option></select></label><label for="image-price">الحد الأقصى بالدولار<input id="image-price" type="number" min="0" step="1" placeholder="دون حد" /></label></div>
+<button class="image-reload" type="button">إعادة تحميل القائمة المصورة</button><p class="image-count muted"></p>
+<div class="image-table-wrap"><table><thead><tr><th scope="col">القسم</th><th scope="col">الاسم كما في الصورة</th><th scope="col">السعر USD</th></tr></thead><tbody></tbody></table></div>
+<p class="image-empty" hidden>لا توجد هواتف مطابقة للبحث.</p></section>
 <noscript>يرجى تفعيل JavaScript لعرض بيانات الهواتف.</noscript></section>
 <script>
 (() => {
@@ -149,6 +158,75 @@
   $('#search-btn').addEventListener('click',render); $('.reload').addEventListener('click',load);
   setInterval(render,60000);
   load();
+})();
+
+(() => {
+  'use strict';
+  const root = document.querySelector('#leb4tech-index');
+  const panel = root?.querySelector('.image-prices');
+  if (!panel) return;
+  const $ = s => panel.querySelector(s);
+  const search = $('#image-search'), brand = $('#image-brand'), max = $('#image-price');
+  const notice = $('.image-notice'), reload = $('.image-reload');
+  const endpoint = new URL('image-prices.json',new URL(root.dataset.url,location.href)).href;
+  const cacheKey = 'leb4tech-image-list-v1:' + endpoint;
+  const today = () => new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Beirut'}).format(new Date());
+  let data = null, cached = false, loading = false;
+  function el(tag,text) { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; return n; }
+  function validate(v) {
+    if (!v || v.format !== 'image_price_list_v1' || v.currency !== 'USD' || v.currency_basis !== 'user_confirmed' || v.method !== 'manual_transcription_from_user_image' || v.retailer_verified !== false) throw Error('basis');
+    if (typeof v.list_date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v.list_date) || !Number.isFinite(Date.parse(v.list_date)) || new Date(v.list_date).toISOString().slice(0,10) !== v.list_date || v.list_date > today()) throw Error('date');
+    const url = new URL(v.source_url);
+    if (url.protocol !== 'https:' || url.username || url.password || !(v.source_name === null || typeof v.source_name === 'string' && v.source_name.trim())) throw Error('source');
+    if (!Array.isArray(v.listings) || !v.listings.length || v.listings.length > 1000 || typeof v.source_warranty_text !== 'string' || !v.source_warranty_text.trim()) throw Error('list');
+    const ids = new Set();
+    for (const r of v.listings) {
+      if (!r || ![r.source_section,r.listing_text].every(x => typeof x === 'string' && x.trim() && x.length <= 500) || !Number.isFinite(r.price_usd) || r.price_usd <= 0 || r.price_usd > 1000000 || r.availability !== null || r.condition !== null || r.model_identity_verified !== false) throw Error('row');
+      const id = JSON.stringify([r.source_section.toLowerCase(),r.listing_text.toLowerCase()]);
+      if (ids.has(id)) throw Error('duplicate'); ids.add(id);
+    }
+    return v;
+  }
+  function render() {
+    if (!data) return;
+    const old = data.list_date < today();
+    notice.textContent = (cached ? '\u062a\u0639\u0630\u0631 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u062d\u062f\u064a\u062b\u0629\u061b \u0646\u0639\u0631\u0636 \u0622\u062e\u0631 \u0642\u0627\u0626\u0645\u0629 \u0645\u062d\u0641\u0648\u0638\u0629. ' : '') + (old ? '\u062a\u0646\u0628\u064a\u0647: \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0645\u0624\u0631\u062e\u0629 \u0628\u064a\u0648\u0645 \u0633\u0627\u0628\u0642 \u0648\u0642\u062f \u062a\u0643\u0648\u0646 \u0627\u0644\u0623\u0633\u0639\u0627\u0631 \u062a\u063a\u064a\u0631\u062a. ' : '') + '\u0627\u0644\u0639\u0645\u0644\u0629 USD \u0628\u062a\u0623\u0643\u064a\u062f \u0631\u0627\u0641\u0639 \u0627\u0644\u0635\u0648\u0631\u0629. \u0627\u0644\u062a\u0648\u0641\u0631 \u0648\u062d\u0627\u0644\u0629 \u0627\u0644\u0623\u062c\u0647\u0632\u0629 \u0648\u0647\u0648\u064a\u0629 \u0627\u0644\u0645\u0648\u062f\u064a\u0644\u0627\u062a \u063a\u064a\u0631 \u0645\u062a\u062d\u0642\u0642 \u0645\u0646\u0647\u0627\u061b \u0644\u064a\u0633\u062a \u0645\u062a\u0648\u0633\u0637 \u0633\u0648\u0642.';
+    const meta = $('.image-meta');
+    meta.replaceChildren(document.createTextNode('\u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0642\u0627\u0626\u0645\u0629: ' + data.list_date + ' \u2014 '));
+    const link = el('a',data.source_name || '\u0631\u0627\u0628\u0637 \u0627\u0644\u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0635\u062f\u0631'); link.href = data.source_url; link.target = '_blank'; link.rel = 'noopener noreferrer'; meta.append(link);
+    const warranty = el('span',' \u2014 \u0639\u0628\u0627\u0631\u0629 \u0627\u0644\u0636\u0645\u0627\u0646 \u0641\u064a \u0627\u0644\u0635\u0648\u0631\u0629: '); const raw = el('bdi',data.source_warranty_text); raw.dir = 'ltr'; warranty.append(raw); meta.append(warranty);
+    const query = search.value.trim().toLowerCase(), ceiling = max.value === '' ? Infinity : Number(max.value);
+    const rows = data.listings.filter(r => r.listing_text.toLowerCase().includes(query) && (!brand.value || r.source_section === brand.value) && r.price_usd <= ceiling);
+    const body = $('tbody'); body.replaceChildren();
+    for (const row of rows) {
+      const tr = el('tr'); const section = el('td',row.source_section), name = el('td',row.listing_text), price = el('td',new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(row.price_usd));
+      section.dir = name.dir = price.dir = 'ltr'; tr.append(section,name,price); body.append(tr);
+    }
+    $('.image-count').textContent = '\u0639\u062f\u062f \u0627\u0644\u0646\u062a\u0627\u0626\u062c: ' + rows.length + ' \u0645\u0646 ' + data.listings.length;
+    $('.image-empty').hidden = rows.length !== 0;
+  }
+  async function load() {
+    if (loading) return; loading = true; reload.disabled = true;
+    const controller = new AbortController(), timer = setTimeout(() => controller.abort(),12000);
+    try {
+      const response = await fetch(endpoint,{mode:'cors',credentials:'omit',cache:'no-cache',signal:controller.signal});
+      if (!response.ok) throw Error('http');
+      const text = await response.text(); if (text.length > 1000000) throw Error('size');
+      data = validate(JSON.parse(text)); cached = false;
+      try { localStorage.setItem(cacheKey,JSON.stringify(data)); } catch { /* Optional cache. */ }
+    } catch {
+      if (!data) { try { const text = localStorage.getItem(cacheKey); if (text) data = validate(JSON.parse(text)); } catch { /* Reject invalid cache. */ } }
+      cached = true;
+      if (!data) notice.textContent = '\u062a\u0639\u0630\u0631 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0645\u0635\u0648\u0631\u0629. \u064a\u0645\u0643\u0646\u0643 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629\u061b \u0623\u0633\u0639\u0627\u0631 \u0627\u0644\u0645\u062a\u0627\u062c\u0631 \u0641\u064a \u0627\u0644\u0642\u0633\u0645 \u0627\u0644\u0622\u062e\u0631 \u0645\u0633\u062a\u0642\u0644\u0629 \u0639\u0646\u0647\u0627.';
+    } finally { clearTimeout(timer); loading = false; reload.disabled = false; }
+    if (data) {
+      const selected = brand.value; brand.replaceChildren(el('option','\u0643\u0644 \u0627\u0644\u0623\u0642\u0633\u0627\u0645')); brand.firstChild.value = '';
+      [...new Set(data.listings.map(r => r.source_section))].sort().forEach(s => {const o = el('option',s); o.value = s; brand.append(o);});
+      brand.value = selected; render();
+    }
+  }
+  search.addEventListener('input',render); brand.addEventListener('change',render); max.addEventListener('input',render);
+  reload.addEventListener('click',load); setInterval(render,60000); load();
 })();
 
 </script>
