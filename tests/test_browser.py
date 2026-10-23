@@ -51,7 +51,7 @@ class BrowserTests(unittest.TestCase):
             page.route('**/data/phones.json',lambda route:route.fulfill(json=dataset,headers={'Access-Control-Allow-Origin':'*'}))
         url=f'http://127.0.0.1:{self.server.server_port}/'
         if blogger:
-            fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/mobileprice/data/phones.json',url+'data/phones.json')
+            fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/phones.json',url+'data/phones.json')
             page.route('**/embed-test',lambda route:route.fulfill(content_type='text/html',body='<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1 id="blog-title">عنوان المدونة</h1>'+fragment+'</body></html>'))
             url+='embed-test'
         response=page.goto(url);self.assertEqual(response.status,200)
@@ -128,7 +128,7 @@ class BrowserTests(unittest.TestCase):
             for allowed in (True,False):
                 CorsHandler.allow=allowed
                 page=self.browser.new_page();self.addCleanup(page.close)
-                fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/mobileprice/data/phones.json',f'http://127.0.0.1:{server.server_port}/data/phones.json')
+                fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/phones.json',f'http://127.0.0.1:{server.server_port}/data/phones.json')
                 QuietHandler.cors_page='<!DOCTYPE html><meta charset="utf-8">'+fragment
                 page.goto(f'http://127.0.0.1:{self.server.server_port}/cors-test')
                 page.wait_for_function("!document.querySelector('.reload').disabled")
