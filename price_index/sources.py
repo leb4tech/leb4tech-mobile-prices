@@ -7,7 +7,7 @@ import time
 import urllib.error
 import urllib.request
 from urllib.parse import urlsplit
-from urllib.robotparser import RobotFileParser
+from price_index.robots import RobotFileParser
 from price_index.dataset import timestamp
 from price_index.market import Source, Offer, validate
 
@@ -16,15 +16,18 @@ MAX_BYTES=2_000_000
 class SourceError(ValueError):pass
 class AccessDenied(SourceError):pass
 class RateLimited(SourceError):pass
+class OutOfStock(SourceError):pass
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs):
         raise AccessDenied('redirect requires separate permission review')
 
 class Transport:
-    def __init__(self, user_agent, interval=5):
+    def __init__(self, user_agent, interval=5, max_bytes=MAX_BYTES):
         if not user_agent or '\n' in user_agent:
             raise SourceError('reviewed user agent required')
+        if not 1 <= max_bytes <= 8_000_000:raise SourceError('invalid response limit')
+        self.max_bytes=max_bytes
         self.user_agent=user_agent
         if interval > 60:raise SourceError('interval requires a separately scheduled adapter')
         self.interval=max(5,interval)
@@ -42,8 +45,8 @@ class Transport:
         try:
             req=urllib.request.Request(url,headers={'User-Agent':self.user_agent,'Accept':'text/html, text/plain;q=0.9','Accept-Encoding':'identity'})
             with self.opener.open(req,timeout=20) as response:
-                body=response.read(MAX_BYTES+1)
-                if len(body)>MAX_BYTES:raise SourceError('response too large')
+                body=response.read(self.max_bytes+1)
+                if len(body)>self.max_bytes:raise SourceError('response too large')
                 return body.decode('utf-8',errors='strict')
         except urllib.error.HTTPError as error:
             if error.code==429:
@@ -154,3 +157,12 @@ class ProductPageAdapter:
             offer=parse_product(self.transport.get(product['url'],self.source.host),product,self.source,self.now)
             results.append((product,offer))
         return results
+
+
+def source_adapter(config, now=None):
+    if config.get('kind', 'jsonld') == 'google_store':
+        from price_index.google_store import GoogleStoreAdapter
+        return GoogleStoreAdapter(config, now=now)
+    if config.get('kind', 'jsonld') != 'jsonld':
+        raise SourceError('unsupported source adapter')
+    return ProductPageAdapter(config, now=now)

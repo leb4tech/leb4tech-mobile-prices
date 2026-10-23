@@ -1,3 +1,63 @@
 {
-  "sources": []
+  "sources": [
+    {
+      "kind": "google_store",
+      "store": "Google Store",
+      "owner": "Google LLC",
+      "host": "store.google.com",
+      "country": "US",
+      "enabled": true,
+      "permission_confirmed": true,
+      "permission_url": "https://store.google.com/robots.txt",
+      "reviewed_at": "2026-10-23T20:41:25.131018+00:00",
+      "user_agent": "Leb4TechPriceIndex/1.0 (contact: https://www.leb4tech.com/)",
+      "min_interval_seconds": 5,
+      "products": [
+        {
+          "brand": "Google",
+          "model": "Pixel 10",
+          "storage_gb": 128,
+          "ram_gb": 12,
+          "sim": "Dual eSIM",
+          "warranty": "ضمان Google لمدة سنة (الولايات المتحدة)",
+          "condition": "new",
+          "specs": [
+            "اللون: Obsidian",
+            "نسخة Unlocked",
+            "المعالج: Google Tensor G5"
+          ],
+          "image": null,
+          "color": "Obsidian",
+          "variant_description": "Pixel 10 Obsidian 128GB (Unlocked)",
+          "processor": "Google Tensor G5",
+          "url": "https://store.google.com/us/config/pixel_10?hl=en-US",
+          "evidence_url": "https://store.google.com/us/config/pixel_10?hl=en-US",
+          "spec_url": "https://store.google.com/us/product/pixel_10_specs?hl=en-US",
+          "reviewed_at": "2026-10-23T20:41:25.131018+00:00"
+        },
+        {
+          "brand": "Google",
+          "model": "Pixel 10",
+          "storage_gb": 256,
+          "ram_gb": 12,
+          "sim": "Dual eSIM",
+          "warranty": "ضمان Google لمدة سنة (الولايات المتحدة)",
+          "condition": "new",
+          "specs": [
+            "اللون: Obsidian",
+            "نسخة Unlocked",
+            "المعالج: Google Tensor G5"
+          ],
+          "image": null,
+          "color": "Obsidian",
+          "variant_description": "Pixel 10 Obsidian 256GB (Unlocked)",
+          "processor": "Google Tensor G5",
+          "url": "https://store.google.com/us/config/pixel_10?hl=en-US",
+          "evidence_url": "https://store.google.com/us/config/pixel_10?hl=en-US",
+          "spec_url": "https://store.google.com/us/product/pixel_10_specs?hl=en-US",
+          "reviewed_at": "2026-10-23T20:41:25.131018+00:00"
+        }
+      ]
+    }
+  ]
 }

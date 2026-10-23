@@ -6,7 +6,7 @@ import logging
 from pathlib import Path
 from price_index.dataset import validate_dataset, atomic_json, variant_id, timestamp
 from price_index.market import market_average, validate
-from price_index.sources import ProductPageAdapter
+from price_index.sources import source_adapter
 
 LOG=logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ def build(previous,batches,now):
     if international:result.update(pricing_basis='international_retail',currency='USD')
     return validate_dataset(result,now),updated
 
-def refresh(config_path='config/sources.json',data_path='data/global-phones.json',report_path='data/status.json',factory=ProductPageAdapter,now=None):
+def refresh(config_path='config/sources.json',data_path='data/global-phones.json',report_path='data/status.json',factory=source_adapter,now=None):
     now=now or datetime.now(timezone.utc)
     previous=json.loads(Path(data_path).read_text())
     validate_dataset(previous,now)
