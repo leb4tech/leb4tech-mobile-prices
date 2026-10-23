@@ -3,3 +3,8 @@ __pycache__/
 .venv/
 site/
 reports/
+
+node_modules/
+.wrangler/
+.dev.vars
+.env

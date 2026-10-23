@@ -43,12 +43,18 @@
       "minLength": 1
     },
     "source_warranty_text": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "minLength": 1,
       "maxLength": 500
     },
     "method": {
-      "const": "manual_transcription_from_user_image"
+      "enum": [
+        "manual_transcription_from_user_image",
+        "ocr_with_user_approval"
+      ]
     },
     "retailer_verified": {
       "const": false

@@ -124,3 +124,9 @@ class BrowserTests(unittest.TestCase):
                 page.wait_for_function("document.querySelector('.image-prices').getAttribute('aria-busy') === 'false'")
                 self.assertEqual(page.locator('tbody tr').count(),1 if allowed else 0)
         finally:server.shutdown();server.server_close();thread.join()
+
+    def test_approved_ocr_list_uses_same_simple_interface(self):
+        data=copy.deepcopy(IMAGE);data['method']='ocr_with_user_approval';data['source_warranty_text']=None
+        page=self.page(value=data,blogger=True)
+        self.assertEqual(page.locator('tbody tr').count(),1)
+        self.assertIn('$123.00',page.locator('tbody').inner_text())

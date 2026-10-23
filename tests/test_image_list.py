@@ -26,3 +26,9 @@ class ImageListTests(unittest.TestCase):
         v=copy.deepcopy(IMAGE);v['listings'].append(copy.deepcopy(v['listings'][0]));bad.append(v)
         for v in bad:
             with self.subTest(value=v),self.assertRaises(Exception):validate_image_list(v)
+
+    def test_owner_approved_ocr_and_unknown_warranty_are_supported(self):
+        value=copy.deepcopy(IMAGE)
+        value['method']='ocr_with_user_approval'
+        value['source_warranty_text']=None
+        validate_image_list(value)
