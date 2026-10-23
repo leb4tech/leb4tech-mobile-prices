@@ -1,7 +1,74 @@
 {
   "schema_version": 2,
+  "updated_at": "2026-10-23T20:42:12.918099+00:00",
+  "phones": [
+    {
+      "brand": "Google",
+      "model": "Pixel 10",
+      "storage_gb": 256,
+      "ram_gb": 12,
+      "sim": "Dual eSIM",
+      "warranty": "ضمان Google لمدة سنة (الولايات المتحدة)",
+      "condition": "new",
+      "specs": [
+        "اللون: Obsidian",
+        "نسخة Unlocked",
+        "المعالج: Google Tensor G5"
+      ],
+      "image": null,
+      "market": "US",
+      "id": "7eb8479f7cfade572db45eb0",
+      "average_usd": null,
+      "status": "insufficient_data",
+      "updated_at": "2026-10-23T20:42:12.918099+00:00",
+      "offers": [
+        {
+          "store": "Google Store",
+          "owner": "Google LLC",
+          "url": "https://store.google.com/us/config/pixel_10?hl=en-US",
+          "currency": "USD",
+          "price_usd": 899.0,
+          "available": true,
+          "condition": "new",
+          "observed_at": "2026-10-23T20:42:12.918099+00:00",
+          "country": "US"
+        }
+      ]
+    },
+    {
+      "brand": "Google",
+      "model": "Pixel 10",
+      "storage_gb": 128,
+      "ram_gb": 12,
+      "sim": "Dual eSIM",
+      "warranty": "ضمان Google لمدة سنة (الولايات المتحدة)",
+      "condition": "new",
+      "specs": [
+        "اللون: Obsidian",
+        "نسخة Unlocked",
+        "المعالج: Google Tensor G5"
+      ],
+      "image": null,
+      "market": "US",
+      "id": "c90f6fbda7f46fa18632076f",
+      "average_usd": null,
+      "status": "insufficient_data",
+      "updated_at": "2026-10-23T20:42:12.918099+00:00",
+      "offers": [
+        {
+          "store": "Google Store",
+          "owner": "Google LLC",
+          "url": "https://store.google.com/us/config/pixel_10?hl=en-US",
+          "currency": "USD",
+          "price_usd": 799.0,
+          "available": true,
+          "condition": "new",
+          "observed_at": "2026-10-23T20:42:12.918099+00:00",
+          "country": "US"
+        }
+      ]
+    }
+  ],
   "pricing_basis": "international_retail",
-  "currency": "USD",
-  "updated_at": null,
-  "phones": []
+  "currency": "USD"
 }

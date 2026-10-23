@@ -1,4 +1,4 @@
-"""Chromium tests use synthetic offers only; production data remains empty."""
+"""Chromium tests use synthetic offers only and do not overwrite production data."""
 from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 import functools
