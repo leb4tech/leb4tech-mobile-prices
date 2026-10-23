@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "leb4tech-price-bot",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "durable_objects": {"bindings": [{"name": "PRICE_BOT", "class_name": "PriceBot"}]},
+  "migrations": [{"tag": "v1", "new_sqlite_classes": ["PriceBot"]}],
+  "vars": {
+    "GITHUB_REPOSITORY": "leb4tech/leb4tech-mobile-prices",
+    "GITHUB_BRANCH": "main",
+    "GITHUB_WORKFLOW": "pages.yml",
+    "OPENAI_MODEL": "gpt-4.1-mini"
+  },
+  "observability": {"enabled": false}
+}
