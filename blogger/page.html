@@ -1,0 +1,48 @@
+<!-- Paste into Blogger > Pages > New Page > HTML view. Replace USERNAME in FEED_URL. -->
+<div id="leb4tech-price-index" dir="rtl" lang="ar">
+<style>
+#leb4tech-price-index{--fg:#161616;--muted:#656565;--bd:#e5e5e5;font-family:Tahoma,Arial,sans-serif;box-sizing:border-box;color:var(--fg);max-width:1100px;margin:auto;line-height:1.7}
+#leb4tech-price-index *{box-sizing:border-box}#leb4tech-price-index .lp-hero{background:#161616;color:white;border-radius:20px;padding:25px 22px;margin-bottom:18px}#leb4tech-price-index h2{font-size:26px;margin:0 0 7px}#leb4tech-price-index .lp-hero p{margin:0;color:#dedede}#leb4tech-price-index .lp-search{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}#leb4tech-price-index input,#leb4tech-price-index select{padding:13px;border:1px solid var(--bd);border-radius:12px;font:inherit;background:white;color:var(--fg)}#leb4tech-price-index input{flex:2;min-width:180px}#leb4tech-price-index select{flex:1;min-width:145px}#leb4tech-price-index .lp-status{font-size:13px;color:var(--muted);margin-bottom:15px}#leb4tech-price-index .lp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px}#leb4tech-price-index .lp-card{border:1px solid var(--bd);border-radius:16px;padding:18px;background:white}#leb4tech-price-index .lp-name{font-weight:700;font-size:17px;direction:ltr;text-align:left;overflow-wrap:anywhere}#leb4tech-price-index .lp-brand{font-size:12px;color:var(--muted)}#leb4tech-price-index .lp-price{font-size:27px;font-weight:800;margin:10px 0 0;direction:ltr;text-align:right}#leb4tech-price-index .lp-small{color:var(--muted);font-size:13px}#leb4tech-price-index details{margin-top:10px;border-top:1px solid var(--bd);padding-top:10px}#leb4tech-price-index summary{cursor:pointer;font-weight:600}#leb4tech-price-index .lp-offer{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0}#leb4tech-price-index a{color:inherit;text-decoration:underline}#leb4tech-price-index .lp-note{background:#f6f6f6;border-radius:12px;padding:14px;margin-top:20px;font-size:13px}#leb4tech-price-index .lp-empty{padding:28px;text-align:center;background:#fafafa;border-radius:14px}
+</style>
+<section class="lp-hero"><h2>أسعار الهواتف في لبنان</h2><p>ابحث عن هاتفك وشاهد متوسط سعره بالدولار الأمريكي لدى متاجر لبنانية.</p></section>
+<div class="lp-search"><input id="lp-q" type="search" aria-label="ابحث عن الهاتف" placeholder="مثلاً: Samsung Galaxy أو iPhone" /><select id="lp-brand" aria-label="الشركة"><option value="">جميع الشركات</option></select><select id="lp-sort" aria-label="ترتيب"><option value="name">الاسم</option><option value="asc">السعر: الأقل أولًا</option><option value="desc">السعر: الأعلى أولًا</option></select></div>
+<div class="lp-status" id="lp-status" role="status">جارٍ تحميل البيانات…</div><div id="lp-results" class="lp-grid"></div>
+<div class="lp-note">الأسعار بالدولار الأمريكي، وهي متوسط حسابي لعروض متاجر مستقلة وليست عرض بيع أو سعرًا رسميًا ثابتًا. قد تختلف الأسعار حسب المخزون والضمان والرسوم. نعتمد فقط النسخ التي أمكن مطابقة مواصفاتها المذكورة في العروض. تحقّق من السعر النهائي لدى المتجر قبل الشراء.</div>
+</div>
+<script>
+(function(){
+'use strict';
+/* Replace USERNAME/REPO with the actual PUBLIC GitHub username and repository. */
+var FEED_URL='https://cdn.jsdelivr.net/gh/USERNAME/leb4tech-mobile-prices@main/data/phones.json';
+var root=document.getElementById('leb4tech-price-index');if(!root)return;
+var q=root.querySelector('#lp-q'), brand=root.querySelector('#lp-brand'), sort=root.querySelector('#lp-sort'), results=root.querySelector('#lp-results'), status=root.querySelector('#lp-status');
+var phones=[],stamp='';
+function node(tag,cl,txt){var x=document.createElement(tag);if(cl)x.className=cl;if(txt!==undefined)x.textContent=txt;return x;}
+function usd(v){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(v);}
+function render(){
+ var term=q.value.trim().toLowerCase(), selected=brand.value;
+ var rows=phones.filter(function(p){return (!selected||p.brand===selected)&&p.name.toLowerCase().includes(term);});
+ rows.sort(function(a,b){if(sort.value==='asc')return a.average_usd-b.average_usd;if(sort.value==='desc')return b.average_usd-a.average_usd;return a.name.localeCompare(b.name,'en');});
+ results.replaceChildren();
+ if(!rows.length){results.appendChild(node('div','lp-empty','لا توجد نتائج مطابقة. جرّب البحث باسم موديل آخر.'));}
+ rows.forEach(function(p){
+ var card=node('article','lp-card');card.appendChild(node('div','lp-brand',p.brand));card.appendChild(node('div','lp-name',p.name));
+ card.appendChild(node('div','lp-price',usd(p.average_usd)));
+ card.appendChild(node('div','lp-small','متوسط '+p.store_count+' متاجر · من '+usd(p.min_usd)+' إلى '+usd(p.max_usd)));
+ var specs=[];if(p.storage)specs.push('التخزين: '+p.storage);if(p.ram)specs.push('RAM: '+p.ram);if(p.sim&&p.sim!=='unspecified')specs.push('الشريحة: '+p.sim);
+ if(specs.length)card.appendChild(node('div','lp-small',specs.join(' | ')));
+ var d=node('details'), s=node('summary','', 'الأسعار حسب المتجر');d.appendChild(s);
+ (p.offers||[]).forEach(function(o){var line=node('div','lp-offer');var link=node('a','',o.store);try{var url=new URL(o.url);if(url.protocol==='https:'){link.href=url.href;link.target='_blank';link.rel='noopener noreferrer sponsored';}}catch(e){}line.appendChild(link);line.appendChild(node('b','',usd(o.price_usd)));d.appendChild(line);});
+ card.appendChild(d);results.appendChild(card);
+ });
+ status.textContent='عدد النتائج: '+rows.length+' · آخر تحديث: '+stamp;
+}
+[q,brand,sort].forEach(function(x){x.addEventListener('input',render);});
+fetch(FEED_URL+'?v='+Math.floor(Date.now()/3600000),{cache:'no-cache'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).then(function(data){
+ if(!data||!Array.isArray(data.phones)||data.currency!=='USD')throw Error('Invalid feed');
+ phones=data.phones.filter(function(p){return p&&typeof p.name==='string'&&typeof p.average_usd==='number'&&p.store_count>=2&&Array.isArray(p.offers);});
+ var date=new Date(data.generated_at);stamp=isNaN(date.valueOf())?'غير متوفر':new Intl.DateTimeFormat('ar-LB',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Beirut'}).format(date);
+ Array.from(new Set(phones.map(function(p){return p.brand;}))).sort().forEach(function(b){var opt=document.createElement('option');opt.value=b;opt.textContent=b;brand.appendChild(opt);});render();
+}).catch(function(){results.replaceChildren(node('div','lp-empty','تعذّر تحميل الأسعار حاليًا. يرجى المحاولة لاحقًا.'));status.textContent='البيانات غير متاحة حاليًا';});
+})();
+</script>

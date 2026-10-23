@@ -1,0 +1,5 @@
+[
+  {"id":"global-mobile","name":"Global Mobile","kind":"shopify","url":"https://www.globalmobilelb.com","enabled":true},
+  {"id":"privato-mobile","name":"Privato Mobile","kind":"shopify","url":"https://privatomobile.com","enabled":true},
+  {"id":"outgeeked","name":"OutGeeked","kind":"shopify","url":"https://outgeeked.net","enabled":true}
+]
