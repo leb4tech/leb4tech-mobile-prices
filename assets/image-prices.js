@@ -5,8 +5,8 @@
   if (!panel) return;
   const $ = s => panel.querySelector(s);
   const search = $('#image-search'), brand = $('#image-brand'), max = $('#image-price');
-  const notice = $('.image-notice'), reload = $('.image-reload');
-  const endpoint = new URL('image-prices.json',new URL(root.dataset.url,location.href)).href;
+  const notice = $('.image-notice');
+  const endpoint = new URL(root.dataset.url,location.href).href;
   const cacheKey = 'leb4tech-image-list-v1:' + endpoint;
   const today = () => new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Beirut'}).format(new Date());
   let data = null, cached = false, loading = false;
@@ -28,13 +28,12 @@
   function render() {
     if (!data) return;
     const old = data.list_date < today();
-    notice.textContent = (cached ? 'تعذر تحميل القائمة الحديثة؛ نعرض آخر قائمة محفوظة. ' : '') + (old ? 'تنبيه: القائمة مؤرخة بيوم سابق وقد تكون الأسعار تغيرت. ' : '') + 'العملة USD بتأكيد رافع الصورة. التوفر وحالة الأجهزة وهوية الموديلات غير متحقق منها؛ ليست متوسط سوق.';
+    notice.textContent = (cached ? 'تعذر تحميل القائمة الحديثة؛ نعرض آخر قائمة محفوظة. ' : '') + (old ? 'القائمة من يوم سابق؛ قد تكون الأسعار تغيرت. ' : '') + 'الأسعار بالدولار الأمريكي USD.';
     const meta = $('.image-meta');
     meta.replaceChildren(document.createTextNode('تاريخ القائمة: ' + data.list_date + ' — '));
-    const link = el('a',data.source_name || 'رابط الصورة المصدر'); link.href = data.source_url; link.target = '_blank'; link.rel = 'noopener noreferrer'; meta.append(link);
-    const warranty = el('span',' — عبارة الضمان في الصورة: '); const raw = el('bdi',data.source_warranty_text); raw.dir = 'ltr'; warranty.append(raw); meta.append(warranty);
+    const link = el('a',data.source_name || 'المصدر'); link.href = data.source_url; link.target = '_blank'; link.rel = 'noopener noreferrer'; meta.append(link);
     const query = search.value.trim().toLowerCase(), ceiling = max.value === '' ? Infinity : Number(max.value);
-    const rows = data.listings.filter(r => r.listing_text.toLowerCase().includes(query) && (!brand.value || r.source_section === brand.value) && r.price_usd <= ceiling);
+    const rows = data.listings.filter(r => (r.source_section + ' ' + r.listing_text).toLowerCase().includes(query) && (!brand.value || r.source_section === brand.value) && r.price_usd <= ceiling);
     const body = $('tbody'); body.replaceChildren();
     for (const row of rows) {
       const tr = el('tr'); const section = el('td',row.source_section), name = el('td',row.listing_text), price = el('td',new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(row.price_usd));
@@ -44,7 +43,7 @@
     $('.image-empty').hidden = rows.length !== 0;
   }
   async function load() {
-    if (loading) return; loading = true; reload.disabled = true;
+    if (loading) return; loading = true; panel.setAttribute('aria-busy','true');
     const controller = new AbortController(), timer = setTimeout(() => controller.abort(),12000);
     try {
       const response = await fetch(endpoint,{mode:'cors',credentials:'omit',cache:'no-cache',signal:controller.signal});
@@ -55,14 +54,14 @@
     } catch {
       if (!data) { try { const text = localStorage.getItem(cacheKey); if (text) data = validate(JSON.parse(text)); } catch { /* Reject invalid cache. */ } }
       cached = true;
-      if (!data) notice.textContent = 'تعذر تحميل القائمة المصورة. يمكنك إعادة المحاولة؛ أسعار المتاجر في القسم الآخر مستقلة عنها.';
-    } finally { clearTimeout(timer); loading = false; reload.disabled = false; }
+      if (!data) notice.textContent = 'تعذر تحميل الأسعار. حدّث الصفحة للمحاولة مجددا.';
+    } finally { clearTimeout(timer); loading = false; panel.setAttribute('aria-busy','false'); }
     if (data) {
-      const selected = brand.value; brand.replaceChildren(el('option','كل الأقسام')); brand.firstChild.value = '';
+      const selected = brand.value; brand.replaceChildren(el('option','كل الشركات')); brand.firstChild.value = '';
       [...new Set(data.listings.map(r => r.source_section))].sort().forEach(s => {const o = el('option',s); o.value = s; brand.append(o);});
       brand.value = selected; render();
     }
   }
   search.addEventListener('input',render); brand.addEventListener('change',render); max.addEventListener('input',render);
-  reload.addEventListener('click',load); setInterval(render,60000); load();
+  setInterval(render,60000); load();
 })();

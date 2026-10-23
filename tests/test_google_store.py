@@ -15,6 +15,7 @@ NOW = datetime.now(timezone.utc)
 
 def config():
     c = json.loads(Path('config/sources.json').read_text())['sources'][0]
+    c['enabled'] = True  # Exercise adapter with synthetic transport, independent of production enablement.
     c['reviewed_at'] = NOW.isoformat()
     for p in c['products']: p['reviewed_at'] = NOW.isoformat()
     return c
