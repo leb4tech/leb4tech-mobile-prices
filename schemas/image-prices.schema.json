@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "list_date",
+    "currency",
+    "currency_basis",
+    "source_url",
+    "source_name",
+    "source_warranty_text",
+    "method",
+    "retailer_verified",
+    "notes_ar",
+    "listings",
+    "excluded"
+  ],
+  "properties": {
+    "format": {
+      "const": "image_price_list_v1"
+    },
+    "list_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "currency": {
+      "const": "USD"
+    },
+    "currency_basis": {
+      "const": "user_confirmed"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "source_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "source_warranty_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "method": {
+      "const": "manual_transcription_from_user_image"
+    },
+    "retailer_verified": {
+      "const": false
+    },
+    "notes_ar": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "listings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_section",
+          "listing_text",
+          "price_usd",
+          "availability",
+          "condition",
+          "model_identity_verified"
+        ],
+        "properties": {
+          "source_section": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "listing_text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "price_usd": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1000000
+          },
+          "availability": {
+            "const": null
+          },
+          "condition": {
+            "const": null
+          },
+          "model_identity_verified": {
+            "const": false
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 1000
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_section",
+          "listing_text",
+          "price_usd",
+          "reason"
+        ],
+        "properties": {
+          "source_section": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "listing_text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "price_usd": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1000000
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
+      },
+      "maxItems": 1000
+    }
+  }
+}

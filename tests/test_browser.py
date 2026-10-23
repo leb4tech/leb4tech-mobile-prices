@@ -44,11 +44,13 @@ class BrowserTests(unittest.TestCase):
         batch=[(PRODUCT,replace(offer(),observed_at=now))]
         if not single:batch.append((PRODUCT,replace(offer(source,'200'),observed_at=now)))
         return build(EMPTY,batch,now)[0]
-    def page(self,width=390,dataset=None,blogger=False):
+    def page(self,width=390,dataset=None,blogger=False,image_dataset=None):
         page=self.browser.new_page(viewport={'width':width,'height':844})
         self.addCleanup(page.close)
         if dataset is not None:
             page.route('**/data/global-phones.json',lambda route:route.fulfill(json=dataset,headers={'Access-Control-Allow-Origin':'*'}))
+        if image_dataset is not None:
+            page.route('**/data/image-prices.json',lambda route:route.fulfill(json=image_dataset,headers={'Access-Control-Allow-Origin':'*'}))
         url=f'http://127.0.0.1:{self.server.server_port}/'
         if blogger:
             fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/global-phones.json',url+'data/global-phones.json')
@@ -168,3 +170,42 @@ class BrowserTests(unittest.TestCase):
         page=self.page(dataset=data)
         self.assertEqual(page.locator('article').count(),0)
         self.assertIn('تعذّر تحميل',page.get_by_role('status').inner_text())
+
+    def test_image_list_literal_labels_filters_and_responsive_blogger(self):
+        from test_image_list import IMAGE
+        import copy
+        value=copy.deepcopy(IMAGE)
+        value['listings'][0]['listing_text']='<img src=x onerror=alert(1)> PM Mix 1 Terra'
+        for width in (320,1280):
+            page=self.page(width,self.dataset(),blogger=True,image_dataset=value)
+            page.wait_for_function("document.querySelector('.image-count').textContent.includes('1')")
+            panel=page.locator('.image-prices')
+            self.assertEqual(panel.locator('tbody tr').count(),1)
+            self.assertIn('<img src=x',panel.locator('tbody').inner_text())
+            self.assertEqual(panel.locator('img').count(),0)
+            self.assertIn('2020-01-02',panel.locator('.image-meta').inner_text())
+            self.assertIn('غير متحقق',panel.locator('.image-notice').inner_text())
+            self.assertTrue(page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+            panel.locator('#image-search').fill('missing');self.assertEqual(panel.locator('tbody tr').count(),0)
+            panel.locator('#image-search').fill('pm mix');self.assertEqual(panel.locator('tbody tr').count(),1)
+            panel.locator('#image-price').fill('122');self.assertEqual(panel.locator('tbody tr').count(),0)
+            self.assertEqual(page.locator('article').count(),1)
+
+    def test_bad_image_list_cannot_break_retail_prices(self):
+        from test_image_list import IMAGE
+        import copy
+        value=copy.deepcopy(IMAGE);value['currency']='LBP'
+        page=self.page(dataset=self.dataset(),image_dataset=value)
+        page.wait_for_function("document.querySelector('.image-notice').textContent.includes('تعذر')")
+        self.assertEqual(page.locator('.image-prices tbody tr').count(),0)
+        self.assertIn('$150.00',page.locator('.price').inner_text())
+
+    def test_image_list_failure_keeps_cached_original_date(self):
+        from test_image_list import IMAGE
+        page=self.page(dataset=self.dataset(),image_dataset=IMAGE)
+        page.wait_for_function("document.querySelector('.image-count').textContent.includes('1')")
+        page.route('**/data/image-prices.json',lambda route:route.abort())
+        page.locator('.image-reload').click()
+        page.wait_for_function("document.querySelector('.image-notice').textContent.includes('محفوظة')")
+        self.assertIn('2020-01-02',page.locator('.image-meta').inner_text())
+        self.assertEqual(page.locator('.image-prices tbody tr').count(),1)

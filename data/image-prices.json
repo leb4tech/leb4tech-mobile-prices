@@ -1,0 +1,809 @@
+{
+  "format": "image_price_list_v1",
+  "list_date": "2026-10-23",
+  "currency": "USD",
+  "currency_basis": "user_confirmed",
+  "source_url": "https://www.facebook.com/photo?fbid=1548705240625052&set=a.550296653799254",
+  "source_name": null,
+  "source_warranty_text": "One Year Warranty",
+  "method": "manual_transcription_from_user_image",
+  "retailer_verified": false,
+  "notes_ar": [
+    "الأسماء والاختصارات منقولة من الصورة؛ لم تُعتمد هوية الموديلات لدى الشركات المصنعة.",
+    "لا تثبت القائمة التوفر أو حالة الأجهزة.",
+    "الصورة مقطوعة من الأسفل؛ القائمة لا تمثل جميع محتويات المصدر.",
+    "لا تدخل هذه الأسعار في متوسط البيانات الآلية المتحقق منها."
+  ],
+  "listings": [
+    {
+      "source_section": "Samsung",
+      "listing_text": "A08 64GB\\4R",
+      "price_usd": 155,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A08 128GB\\4R",
+      "price_usd": 190,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A08 128GB\\6R",
+      "price_usd": 210,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A18 128GB\\4R",
+      "price_usd": 220,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A18 128GB\\6R",
+      "price_usd": 245,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A18 256GB\\8R",
+      "price_usd": 320,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A26 256GB\\8R",
+      "price_usd": 290,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A27 128GB\\6R",
+      "price_usd": 270,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A27 256GB\\8R",
+      "price_usd": 325,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A37 128GB\\8R",
+      "price_usd": 335,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A37 256GB\\8R",
+      "price_usd": 370,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A37 256GB\\12R",
+      "price_usd": 380,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A57 128GB\\8R",
+      "price_usd": 385,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A57 256GB\\8R",
+      "price_usd": 435,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A57 256GB\\12R",
+      "price_usd": 485,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "A57 512GB\\12R",
+      "price_usd": 525,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S25 FE 256GB\\8R",
+      "price_usd": 600,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 FE 256GB\\8R",
+      "price_usd": 690,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 256GB\\12R",
+      "price_usd": 840,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 512 GB\\12R",
+      "price_usd": 970,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 Plus 256GB\\12R",
+      "price_usd": 960,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 Plus 512 GB\\12R",
+      "price_usd": 1080,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 Ultra 256GB\\12R",
+      "price_usd": 1080,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 Ultra 512GB\\12R",
+      "price_usd": 1270,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "S26 Ultra 1 Terra\\16R",
+      "price_usd": 1590,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Flip 8 256GB\\12R",
+      "price_usd": 970,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Flip 8 512GB\\12R",
+      "price_usd": 1100,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Fold 8 256GB\\12R",
+      "price_usd": 1620,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Fold 8 512GB\\12R",
+      "price_usd": 1730,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Fold 8 1 Terra\\16R",
+      "price_usd": 2220,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Fold 8 Ultra 256GB\\12R",
+      "price_usd": 1750,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Fold 8 Ultra 512GB\\12R",
+      "price_usd": 1900,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Fold 8 Ultra 1 TERRA\\16R",
+      "price_usd": 2400,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Samsung",
+      "listing_text": "Z Tri-Fold 1 Terra\\16R",
+      "price_usd": 3800,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Go 3 128GB\\4R",
+      "price_usd": 150,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Pop 20 C 64GB\\4R",
+      "price_usd": 113,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Spark 50 C 128GB\\4R",
+      "price_usd": 170,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Spark 50 256GB\\4R",
+      "price_usd": 195,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Spark 50 Pro 256GB\\4R",
+      "price_usd": 217,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Pova Curve 2 256/8R 5G",
+      "price_usd": 348,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Pova 8 256GB\\8R +256GB Cloud",
+      "price_usd": 318,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Camon 50 Pro 256GB/8R + 256GB TECNO CLOUD 3 YEARS",
+      "price_usd": 359,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Camon 50 Ultra 256GB\\12R 5G",
+      "price_usd": 473,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Phantom V Fold 2 512GB\\12R",
+      "price_usd": 980,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 E 256GB",
+      "price_usd": 640,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 256GB E-Sim+Sim",
+      "price_usd": 960,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 512GB E-Sim+Sim",
+      "price_usd": 1120,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 Air 256GB E Sim",
+      "price_usd": 1000,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 Air 512GB E Sim",
+      "price_usd": 1150,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 Air 1 Terra E Sim",
+      "price_usd": 1250,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 Pro 512GB E Sim Mix",
+      "price_usd": 1480,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 Pro 1 Terra E Sim Mix",
+      "price_usd": 1580,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 PM 512GB Sim Mix",
+      "price_usd": 1680,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 PM 512GB E-Sim",
+      "price_usd": 1580,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 PM 1 Terra ESim",
+      "price_usd": 1780,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 PM 2 Terra Esim",
+      "price_usd": 1980,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 17 PM 1 Terra Sim",
+      "price_usd": 2000,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB Sim Silver",
+      "price_usd": 1570,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB Sim Blue",
+      "price_usd": 1570,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB Sim Burgund",
+      "price_usd": 1600,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB Sim Black",
+      "price_usd": 1580,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB Sim Silver",
+      "price_usd": 1810,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB Sim Blue",
+      "price_usd": 1820,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB Sim Burgund",
+      "price_usd": 1870,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB Sim Black",
+      "price_usd": 1870,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 1 Terra Sim Mix",
+      "price_usd": 2500,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 2 Terra Sim Mix",
+      "price_usd": 2900,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB Sim Silver",
+      "price_usd": 1730,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB Sim Blue",
+      "price_usd": 1730,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB Sim Burgund",
+      "price_usd": 1790,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB Sim Black",
+      "price_usd": 1740,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB Sim Silver",
+      "price_usd": 2000,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB Sim Blue",
+      "price_usd": 2000,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB Sim Burgund",
+      "price_usd": 2120,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB Sim Black",
+      "price_usd": 2100,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 1 Terra Sim Mix",
+      "price_usd": 2650,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 2 Terra Sim Mix",
+      "price_usd": 3200,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB E-Sim Silver",
+      "price_usd": 1510,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB E-Sim Blue",
+      "price_usd": 1510,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB E-Sim Burgu",
+      "price_usd": 1570,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 256GB E-Sim Black",
+      "price_usd": 1520,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB E-Sim Silver",
+      "price_usd": 1790,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB E-Sim Blue",
+      "price_usd": 1810,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB E-Sim Burgu",
+      "price_usd": 1860,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 512GB E-Sim Black",
+      "price_usd": 1860,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 1 Terra E-Sim Mix",
+      "price_usd": 2400,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 Pro 2 Terra E-Sim Mix",
+      "price_usd": 2800,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB E-Sim Silver",
+      "price_usd": 1690,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB E-Sim Blue",
+      "price_usd": 1690,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB E-Sim Burgu",
+      "price_usd": 1790,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 256GB E-Sim Black",
+      "price_usd": 1690,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB E-Sim Silver",
+      "price_usd": 1950,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB E-Sim Blue",
+      "price_usd": 1950,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB E-Sim Burgu",
+      "price_usd": 2100,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 512GB E-Sim Black",
+      "price_usd": 2000,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 1 Terra E-Sim Mix",
+      "price_usd": 2500,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    },
+    {
+      "source_section": "Apple",
+      "listing_text": "iPhone 18 PM 2 Terra E-Sim Mix",
+      "price_usd": 3000,
+      "availability": null,
+      "condition": null,
+      "model_identity_verified": false
+    }
+  ],
+  "excluded": [
+    {
+      "source_section": "Tecno",
+      "listing_text": "Pova 8 Pro 256GB\\8R +256GB Clo…",
+      "price_usd": 432,
+      "reason": "اسم مقطوع في الصورة"
+    },
+    {
+      "source_section": "Tecno",
+      "listing_text": "Mega Tab SE2 128GB/4R",
+      "price_usd": 199,
+      "reason": "جهاز لوحي؛ خارج قائمة الهواتف"
+    }
+  ]
+}

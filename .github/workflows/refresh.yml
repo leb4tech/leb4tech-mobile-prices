@@ -26,6 +26,7 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_feed.py' -v
       - run: python -m unittest discover -s tests -p 'test_international.py' -v
       - run: python -m unittest discover -s tests -p 'test_google_store.py' -v
+      - run: python -m unittest discover -s tests -p 'test_image_list.py' -v
       - run: python -m price_index.refresh
         id: collect
         continue-on-error: true
