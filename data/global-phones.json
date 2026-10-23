@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-23T20:42:12.918099+00:00",
+  "updated_at": "2026-10-23T20:48:12.760843+00:00",
   "phones": [
     {
       "brand": "Google",
@@ -20,7 +20,7 @@
       "id": "7eb8479f7cfade572db45eb0",
       "average_usd": null,
       "status": "insufficient_data",
-      "updated_at": "2026-10-23T20:42:12.918099+00:00",
+      "updated_at": "2026-10-23T20:48:12.760843+00:00",
       "offers": [
         {
           "store": "Google Store",
@@ -30,7 +30,7 @@
           "price_usd": 899.0,
           "available": true,
           "condition": "new",
-          "observed_at": "2026-10-23T20:42:12.918099+00:00",
+          "observed_at": "2026-10-23T20:48:12.760843+00:00",
           "country": "US"
         }
       ]
@@ -53,7 +53,7 @@
       "id": "c90f6fbda7f46fa18632076f",
       "average_usd": null,
       "status": "insufficient_data",
-      "updated_at": "2026-10-23T20:42:12.918099+00:00",
+      "updated_at": "2026-10-23T20:48:12.760843+00:00",
       "offers": [
         {
           "store": "Google Store",
@@ -63,7 +63,7 @@
           "price_usd": 799.0,
           "available": true,
           "condition": "new",
-          "observed_at": "2026-10-23T20:42:12.918099+00:00",
+          "observed_at": "2026-10-23T20:48:12.760843+00:00",
           "country": "US"
         }
       ]
