@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "checked_at",
+    "state",
+    "failures",
+    "updated_variants"
+  ],
+  "properties": {
+    "checked_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "state": {
+      "enum": [
+        "not_configured",
+        "partial_failure",
+        "failed",
+        "updated",
+        "no_update"
+      ]
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source",
+          "error"
+        ],
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+          }
+        }
+      }
+    },
+    "updated_variants": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

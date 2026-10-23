@@ -1,48 +1,139 @@
-<!-- Paste into Blogger > Pages > New Page > HTML view. Replace USERNAME in FEED_URL. -->
-<div id="leb4tech-price-index" dir="rtl" lang="ar">
 <style>
-#leb4tech-price-index{--fg:#161616;--muted:#656565;--bd:#e5e5e5;font-family:Tahoma,Arial,sans-serif;box-sizing:border-box;color:var(--fg);max-width:1100px;margin:auto;line-height:1.7}
-#leb4tech-price-index *{box-sizing:border-box}#leb4tech-price-index .lp-hero{background:#161616;color:white;border-radius:20px;padding:25px 22px;margin-bottom:18px}#leb4tech-price-index h2{font-size:26px;margin:0 0 7px}#leb4tech-price-index .lp-hero p{margin:0;color:#dedede}#leb4tech-price-index .lp-search{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}#leb4tech-price-index input,#leb4tech-price-index select{padding:13px;border:1px solid var(--bd);border-radius:12px;font:inherit;background:white;color:var(--fg)}#leb4tech-price-index input{flex:2;min-width:180px}#leb4tech-price-index select{flex:1;min-width:145px}#leb4tech-price-index .lp-status{font-size:13px;color:var(--muted);margin-bottom:15px}#leb4tech-price-index .lp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px}#leb4tech-price-index .lp-card{border:1px solid var(--bd);border-radius:16px;padding:18px;background:white}#leb4tech-price-index .lp-name{font-weight:700;font-size:17px;direction:ltr;text-align:left;overflow-wrap:anywhere}#leb4tech-price-index .lp-brand{font-size:12px;color:var(--muted)}#leb4tech-price-index .lp-price{font-size:27px;font-weight:800;margin:10px 0 0;direction:ltr;text-align:right}#leb4tech-price-index .lp-small{color:var(--muted);font-size:13px}#leb4tech-price-index details{margin-top:10px;border-top:1px solid var(--bd);padding-top:10px}#leb4tech-price-index summary{cursor:pointer;font-weight:600}#leb4tech-price-index .lp-offer{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0}#leb4tech-price-index a{color:inherit;text-decoration:underline}#leb4tech-price-index .lp-note{background:#f6f6f6;border-radius:12px;padding:14px;margin-top:20px;font-size:13px}#leb4tech-price-index .lp-empty{padding:28px;text-align:center;background:#fafafa;border-radius:14px}
+.lb4t{direction:rtl;font:16px/1.7 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#171717;background:#fff;max-width:1180px;margin:20px auto;padding:clamp(16px,4vw,40px);border:1px solid #ddd;border-radius:20px;color-scheme:light}.lb4t *{box-sizing:border-box}.lb4t h1{font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.3;margin:10px 0}.lb4t .brandmark{font-size:.9rem;font-weight:800;letter-spacing:.12em}.lb4t .intro{color:#555;max-width:760px}.lb4t .filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;padding:24px 0}.lb4t label{display:block;font-weight:600;font-size:.9rem}.lb4t input,.lb4t select,.lb4t button{font:inherit;width:100%;padding:12px;border:1px solid #aaa;border-radius:8px;background:white;color:#171717;margin-top:6px;min-height:48px}.lb4t button{background:#171717;color:white;cursor:pointer}.lb4t :focus-visible{outline:3px solid #555;outline-offset:3px}.lb4t .notice{padding:14px 18px;border:1px solid #aaa;border-inline-start:4px solid #171717;border-radius:8px;background:#f6f6f6;margin:14px 0;overflow-wrap:anywhere}.lb4t .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:20px;margin-top:24px}.lb4t article{border:1px solid #d8d8d8;border-radius:14px;padding:22px;min-width:0;display:flex;flex-direction:column;gap:10px}.lb4t article h2{font-size:1.15rem;margin:0;line-height:1.5}.lb4t .price{font-size:1.9rem;font-weight:800;margin:4px 0}.lb4t .muted,.lb4t time{color:#555;font-size:.9rem}.lb4t .badge{display:inline-block;border:1px solid #777;border-radius:5px;padding:2px 8px;font-size:.8rem;width:fit-content}.lb4t article img{width:100%;height:180px;object-fit:contain}.lb4t ul{padding-inline-start:22px;margin:0}.lb4t a{color:#171717;text-decoration:underline;text-underline-offset:3px}.lb4t footer{border-top:1px solid #ddd;margin-top:32px;padding-top:20px;font-size:.9rem;color:#555}.lb4t .en{direction:ltr;unicode-bidi:isolate;display:inline-block}.lb4t [hidden]{display:none!important}@media(max-width:650px){.lb4t .filters{grid-template-columns:1fr}.lb4t{margin:8px auto;border-radius:12px}.lb4t .filters{gap:10px;padding:12px 0}}@media(prefers-reduced-motion:reduce){.lb4t *{scroll-behavior:auto!important}}
 </style>
-<section class="lp-hero"><h2>أسعار الهواتف في لبنان</h2><p>ابحث عن هاتفك وشاهد متوسط سعره بالدولار الأمريكي لدى متاجر لبنانية.</p></section>
-<div class="lp-search"><input id="lp-q" type="search" aria-label="ابحث عن الهاتف" placeholder="مثلاً: Samsung Galaxy أو iPhone" /><select id="lp-brand" aria-label="الشركة"><option value="">جميع الشركات</option></select><select id="lp-sort" aria-label="ترتيب"><option value="name">الاسم</option><option value="asc">السعر: الأقل أولًا</option><option value="desc">السعر: الأعلى أولًا</option></select></div>
-<div class="lp-status" id="lp-status" role="status">جارٍ تحميل البيانات…</div><div id="lp-results" class="lp-grid"></div>
-<div class="lp-note">الأسعار بالدولار الأمريكي، وهي متوسط حسابي لعروض متاجر مستقلة وليست عرض بيع أو سعرًا رسميًا ثابتًا. قد تختلف الأسعار حسب المخزون والضمان والرسوم. نعتمد فقط النسخ التي أمكن مطابقة مواصفاتها المذكورة في العروض. تحقّق من السعر النهائي لدى المتجر قبل الشراء.</div>
-</div>
+<section id="leb4tech-index" class="lb4t" lang="ar" dir="rtl" data-url="https://leb4tech.github.io/mobileprice/data/phones.json">
+<header><div class="brandmark" dir="ltr">Leb4Tech</div><h1>مؤشر أسعار الهواتف في لبنان</h1><p class="intro">قارن أسعار النسخة نفسها من متاجر لبنانية مستقلة. الأسعار بالدولار الأمريكي USD، دون تقديرات أو تحويل عملات.</p></header>
+<div class="filters"><label for="phone-input">ابحث عن هاتف<input id="phone-input" type="search" dir="ltr" maxlength="120" placeholder="Samsung Galaxy أو iPhone" /></label><label for="brand-filter">الشركة<select id="brand-filter"><option value="">كل الشركات</option></select></label><label for="price-filter">الحد الأقصى بالدولار<input id="price-filter" type="number" min="0" step="1" inputmode="decimal" placeholder="دون حد" /></label></div>
+<button id="search-btn" type="button">بحث</button><button class="reload" type="button">تحديث البيانات</button>
+<div class="notice" role="status" aria-live="polite">جارٍ تحميل الأسعار الموثّقة…</div><p class="source-status muted" aria-live="polite"></p><p class="summary muted"></p><div class="grid" aria-label="قائمة الهواتف"></div>
+<footer>المتوسط الحسابي يتطلب متجرين مستقلين على الأقل مع تطابق الموديل والسعة وRAM وSIM والحالة والضمان. الأسعار الأقدم من 6 ساعات تحمل تحذيراً، ولا تُستخدم في متوسط جديد. الأسعار والتوفر قابلان للتغيير؛ راجع صفحة المتجر قبل الشراء. قد تبقى آخر بيانات محفوظة عند انقطاع الاتصال.</footer>
+<noscript>يرجى تفعيل JavaScript لعرض بيانات الهواتف.</noscript></section>
 <script>
-(function(){
-'use strict';
-/* Replace USERNAME/REPO with the actual PUBLIC GitHub username and repository. */
-var FEED_URL='https://cdn.jsdelivr.net/gh/USERNAME/leb4tech-mobile-prices@main/data/phones.json';
-var root=document.getElementById('leb4tech-price-index');if(!root)return;
-var q=root.querySelector('#lp-q'), brand=root.querySelector('#lp-brand'), sort=root.querySelector('#lp-sort'), results=root.querySelector('#lp-results'), status=root.querySelector('#lp-status');
-var phones=[],stamp='';
-function node(tag,cl,txt){var x=document.createElement(tag);if(cl)x.className=cl;if(txt!==undefined)x.textContent=txt;return x;}
-function usd(v){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(v);}
-function render(){
- var term=q.value.trim().toLowerCase(), selected=brand.value;
- var rows=phones.filter(function(p){return (!selected||p.brand===selected)&&p.name.toLowerCase().includes(term);});
- rows.sort(function(a,b){if(sort.value==='asc')return a.average_usd-b.average_usd;if(sort.value==='desc')return b.average_usd-a.average_usd;return a.name.localeCompare(b.name,'en');});
- results.replaceChildren();
- if(!rows.length){results.appendChild(node('div','lp-empty','لا توجد نتائج مطابقة. جرّب البحث باسم موديل آخر.'));}
- rows.forEach(function(p){
- var card=node('article','lp-card');card.appendChild(node('div','lp-brand',p.brand));card.appendChild(node('div','lp-name',p.name));
- card.appendChild(node('div','lp-price',usd(p.average_usd)));
- card.appendChild(node('div','lp-small','متوسط '+p.store_count+' متاجر · من '+usd(p.min_usd)+' إلى '+usd(p.max_usd)));
- var specs=[];if(p.storage)specs.push('التخزين: '+p.storage);if(p.ram)specs.push('RAM: '+p.ram);if(p.sim&&p.sim!=='unspecified')specs.push('الشريحة: '+p.sim);
- if(specs.length)card.appendChild(node('div','lp-small',specs.join(' | ')));
- var d=node('details'), s=node('summary','', 'الأسعار حسب المتجر');d.appendChild(s);
- (p.offers||[]).forEach(function(o){var line=node('div','lp-offer');var link=node('a','',o.store);try{var url=new URL(o.url);if(url.protocol==='https:'){link.href=url.href;link.target='_blank';link.rel='noopener noreferrer sponsored';}}catch(e){}line.appendChild(link);line.appendChild(node('b','',usd(o.price_usd)));d.appendChild(line);});
- card.appendChild(d);results.appendChild(card);
- });
- status.textContent='عدد النتائج: '+rows.length+' · آخر تحديث: '+stamp;
-}
-[q,brand,sort].forEach(function(x){x.addEventListener('input',render);});
-fetch(FEED_URL+'?v='+Math.floor(Date.now()/3600000),{cache:'no-cache'}).then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).then(function(data){
- if(!data||!Array.isArray(data.phones)||data.currency!=='USD')throw Error('Invalid feed');
- phones=data.phones.filter(function(p){return p&&typeof p.name==='string'&&typeof p.average_usd==='number'&&p.store_count>=2&&Array.isArray(p.offers);});
- var date=new Date(data.generated_at);stamp=isNaN(date.valueOf())?'غير متوفر':new Intl.DateTimeFormat('ar-LB',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Beirut'}).format(date);
- Array.from(new Set(phones.map(function(p){return p.brand;}))).sort().forEach(function(b){var opt=document.createElement('option');opt.value=b;opt.textContent=b;brand.appendChild(opt);});render();
-}).catch(function(){results.replaceChildren(node('div','lp-empty','تعذّر تحميل الأسعار حاليًا. يرجى المحاولة لاحقًا.'));status.textContent='البيانات غير متاحة حاليًا';});
+(() => {
+  'use strict';
+  const root = document.querySelector('#leb4tech-index');
+  if (!root) return;
+  const $ = selector => root.querySelector(selector);
+  const status = $('.notice'), grid = $('.grid'), summary = $('.summary');
+  const input = $('#phone-input'), brand = $('#brand-filter'), maxPrice = $('#price-filter');
+  const SIX_HOURS = 6 * 60 * 60 * 1000;
+  const conditions = {new:'جديد',used:'مستعمل',refurbished:'مجدّد'};
+  let data = null, cached = false;
+  const endpoint = root.dataset.url;
+  const cacheKey = 'leb4tech-prices-v1:' + endpoint;
+  const validDate = value => typeof value === 'string' && /(?:Z|[+-]\d{2}:\d{2})$/.test(value) && Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now();
+  function https(value) {
+    try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password; } catch { return false; }
+  }
+  function validate(value) {
+    if (!value || value.schema_version !== 1 || !Array.isArray(value.phones) || value.phones.length > 10000) throw Error('schema');
+    if (value.updated_at !== null && !validDate(value.updated_at)) throw Error('date');
+    const ids = new Set(), variants = new Set();
+    value.phones.forEach(p => {
+      if (!p || typeof p.id !== 'string' || !/^[a-f0-9]{24}$/.test(p.id) || ids.has(p.id)) throw Error('id');
+      ids.add(p.id);
+      const variant = JSON.stringify([p.brand,p.model,p.storage_gb,p.ram_gb,p.sim,p.warranty,p.condition]);
+      if (variants.has(variant)) throw Error('duplicate'); variants.add(variant);
+      if (![p.brand,p.model].every(v => typeof v === 'string' && /^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$/.test(v))) throw Error('name');
+      if (!Number.isInteger(p.storage_gb) || p.storage_gb <= 0 || !(p.ram_gb === null || Number.isInteger(p.ram_gb) && p.ram_gb > 0)) throw Error('storage');
+      if (![p.sim,p.warranty].every(v => typeof v === 'string' && v.trim()) || !conditions[p.condition]) throw Error('variant');
+      if (!Array.isArray(p.specs) || p.specs.length > 12 || !p.specs.every(s => typeof s === 'string' && s.trim())) throw Error('specs');
+      if (p.image !== null && (!p.image || !https(p.image.url) || !https(p.image.permission_url))) throw Error('image');
+      if (!validDate(p.updated_at) || !Array.isArray(p.offers) || !p.offers.length) throw Error('offers');
+      const owners = new Set(), stores = new Set(), hosts = new Set();
+      p.offers.forEach(o => {
+        if (!o || ![o.owner,o.store].every(v => typeof v === 'string' && v.trim()) || !https(o.url) || o.currency !== 'USD' || o.available !== true || o.condition !== p.condition || !Number.isFinite(o.price_usd) || o.price_usd <= 0 || o.observed_at !== p.updated_at) throw Error('offer');
+        const owner = o.owner.trim().toLowerCase(), store = o.store.trim().toLowerCase(), host = new URL(o.url).hostname;
+        if (owners.has(owner) || stores.has(store) || hosts.has(host)) throw Error('independence');
+        owners.add(owner); stores.add(store); hosts.add(host);
+      });
+      if (p.offers.length >= 2) {
+        const mean = p.offers.reduce((s,o) => s + o.price_usd, 0) / p.offers.length;
+        if (p.status !== 'verified' || !Number.isFinite(p.average_usd) || p.average_usd <= 0 || Math.abs(p.average_usd - mean) > 0.005001) throw Error('average');
+      } else if (p.status !== 'insufficient_data' || p.average_usd !== null) throw Error('quorum');
+    });
+    const newest = value.phones.length ? Math.max(...value.phones.map(p => Date.parse(p.updated_at))) : null;
+    if ((value.updated_at === null ? null : Date.parse(value.updated_at)) !== newest) throw Error('update');
+    return value;
+  }
+  function element(tag, text, className) {
+    const el = document.createElement(tag);
+    if (text !== undefined) el.textContent = text;
+    if (className) el.className = className;
+    return el;
+  }
+  function date(value) { return new Intl.DateTimeFormat('ar-LB',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Beirut'}).format(new Date(value)); }
+  function message(text) { status.textContent = text; }
+  function render() {
+    if (!data) return;
+    grid.replaceChildren();
+    const query = input.value.trim().toLowerCase();
+    const ceiling = maxPrice.value === '' ? Infinity : Number(maxPrice.value);
+    const phones = data.phones.filter(p => (p.brand + ' ' + p.model).toLowerCase().includes(query) && (!brand.value || p.brand === brand.value) && (ceiling === Infinity || p.average_usd !== null && p.average_usd <= ceiling));
+    summary.textContent = 'عدد النتائج: ' + phones.length;
+    if (!data.phones.length) message((cached ? 'تعذّر تحميل البيانات الحديثة؛ نعرض آخر نسخة محفوظة. ' : '') + 'لا تتوفر أسعار موثّقة حالياً. لن نعرض أسعاراً أو مواصفات تقديرية.');
+    else {
+      const stale = data.phones.some(p => Date.now() - Date.parse(p.updated_at) >= SIX_HOURS);
+      message((cached ? 'تعذّر تحميل البيانات الحديثة؛ نعرض آخر نسخة محفوظة. ' : '') + (stale ? 'تنبيه: تتضمن القائمة أسعاراً قديمة؛ تحقّق من المتجر قبل الشراء. ' : '') + 'آخر تحديث ناجح: ' + date(data.updated_at));
+    }
+    if (!phones.length) grid.append(element('p','لا توجد هواتف مطابقة للفلاتر الحالية.'));
+    phones.forEach(p => {
+      const card = element('article');
+      const heading = element('h2',p.brand + ' ' + p.model,'en'); heading.dir = 'ltr'; card.append(heading);
+      if (p.image) {
+        const image = element('img'); image.src = p.image.url; image.alt = p.brand + ' ' + p.model; image.loading = 'lazy'; image.referrerPolicy = 'no-referrer';
+        image.addEventListener('error',() => image.remove()); card.append(image);
+      }
+      card.append(element('div',`${p.storage_gb} GB · RAM: ${p.ram_gb === null ? 'غير موثّقة' : p.ram_gb + ' GB'}`));
+      card.append(element('div','النسخة: ' + p.sim + ' · الحالة: ' + conditions[p.condition]));
+      card.append(element('div','الضمان: ' + p.warranty,'muted'));
+      const old = Date.now() - Date.parse(p.updated_at) >= SIX_HOURS;
+      card.append(element('span',old ? 'سعر قديم' : p.status === 'verified' ? 'متوسط موثّق' : 'مصادر غير كافية','badge'));
+      card.append(element('p',p.average_usd === null ? 'لا يتوفر متوسط موثوق' : new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(p.average_usd),'price'));
+      card.append(element('p',p.average_usd === null ? 'يلزم متجران مستقلان للنسخة نفسها.' : 'متوسط حسابي من ' + p.offers.length + ' متاجر مستقلة.','muted'));
+      if (p.specs.length) { const ul = element('ul'); p.specs.forEach(s => ul.append(element('li',s))); card.append(ul); }
+      const time = element('time','آخر تحقق: ' + date(p.updated_at)); time.dateTime = p.updated_at; card.append(time);
+      const details = element('details'); details.append(element('summary','المصادر والأسعار'));
+      p.offers.forEach(o => {
+        const row = element('p'); const a = element('a',o.store); a.href = o.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        row.append(a,document.createTextNode(' — ' + new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(o.price_usd))); details.append(row);
+      }); card.append(details); grid.append(card);
+    });
+  }
+  async function getJSON(url) {
+    const controller = new AbortController(), timer = setTimeout(() => controller.abort(),12000);
+    try {
+      const response = await fetch(url,{mode:'cors',credentials:'omit',cache:'no-cache',signal:controller.signal});
+      if (!response.ok) throw Error('http');
+      const text = await response.text(); if (text.length > 4_000_000) throw Error('size');
+      return JSON.parse(text);
+    } finally { clearTimeout(timer); }
+  }
+  async function load() {
+    $('.reload').disabled = true;
+    try {
+      if (!endpoint) throw Error('config');
+      data = validate(await getJSON(endpoint)); cached = false;
+      try { localStorage.setItem(cacheKey,JSON.stringify(data)); } catch { /* Storage may be disabled. */ }
+    } catch {
+      if (!data) { try { const value = localStorage.getItem(cacheKey); if (value) data = validate(JSON.parse(value)); } catch { /* Reject invalid cache. */ } }
+      cached = true;
+      if (!data) message('تعذّر تحميل ملف الأسعار. تحقّق من الرابط العام ودعم CORS ثم أعد المحاولة.');
+    } finally { $('.reload').disabled = false; }
+    if (data) {
+      const selected = brand.value; brand.replaceChildren(element('option','كل الشركات')); brand.firstChild.value = '';
+      [...new Set(data.phones.map(p => p.brand))].sort().forEach(name => { const opt = element('option',name); opt.value = name; brand.append(opt); }); brand.value = selected;
+      render();
+    }
+    try {
+      const report = await getJSON(new URL('status.json',new URL(endpoint,location.href)).href);
+      $('.source-status').textContent = Array.isArray(report.failures) && report.failures.length ? 'تعذّر تحديث بعض المصادر؛ قد تبقى الأسعار السابقة مع تاريخها الأصلي.' : report.state === 'not_configured' ? 'مصادر الأسعار قيد المراجعة ولم تُفعّل بعد.' : '';
+    } catch { $('.source-status').textContent = 'تقرير حالة المصادر غير متاح.'; }
+  }
+  input.addEventListener('input',render); brand.addEventListener('change',render); maxPrice.addEventListener('input',render);
+  $('#search-btn').addEventListener('click',render); $('.reload').addEventListener('click',load);
+  setInterval(render,60000);
+  load();
 })();
+
 </script>

@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sources"
+  ],
+  "properties": {
+    "sources": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "store",
+          "owner",
+          "host",
+          "country",
+          "enabled",
+          "permission_confirmed",
+          "permission_url",
+          "reviewed_at",
+          "user_agent",
+          "min_interval_seconds",
+          "products"
+        ],
+        "properties": {
+          "store": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "host": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+([.-][a-z0-9]+)*\\.[a-z]{2,}$"
+          },
+          "country": {
+            "const": "LB"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "permission_confirmed": {
+            "type": "boolean"
+          },
+          "permission_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user_agent": {
+            "type": "string",
+            "minLength": 10
+          },
+          "min_interval_seconds": {
+            "type": "number",
+            "minimum": 5,
+            "maximum": 60
+          },
+          "products": {
+            "type": "array",
+            "maxItems": 50,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "brand",
+                "model",
+                "storage_gb",
+                "ram_gb",
+                "sim",
+                "warranty",
+                "condition",
+                "specs",
+                "image",
+                "sku",
+                "url",
+                "evidence_url",
+                "reviewed_at"
+              ],
+              "properties": {
+                "brand": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
+                },
+                "model": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$"
+                },
+                "storage_gb": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "ram_gb": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1
+                },
+                "sim": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "warranty": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "condition": {
+                  "enum": [
+                    "new",
+                    "used",
+                    "refurbished"
+                  ]
+                },
+                "specs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "maxItems": 12
+                },
+                "image": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "url",
+                        "permission_url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "pattern": "^https://"
+                        },
+                        "permission_url": {
+                          "type": "string",
+                          "format": "uri",
+                          "pattern": "^https://"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "sku": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                },
+                "evidence_url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                },
+                "reviewed_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

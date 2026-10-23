@@ -1,31 +1,108 @@
-# Leb4Tech Mobile Price Index — Lebanon
+# مؤشر أسعار الهواتف — Leb4Tech
 
-A conservative starter system for an Arabic Blogger page with English phone model names. Python retrieves public Shopify catalogs; GitHub Actions runs every 6 hours, and Blogger displays the resulting `data/phones.json` through jsDelivr.
+مشروع صفحة عربية لموقع Blogger مع بيانات مستقلة قابلة للنشر على استضافة ثابتة. الواجهة بالأبيض والأسود، RTL، وتبقي أسماء الشركات والموديلات باللغة الإنجليزية. تدعم البحث والتصفية حسب الشركة والحد الأعلى للسعر، وروابط عروض المتاجر، والصور المصرح بها، والتحذير من الأسعار القديمة، ونسخة محلية محفوظة عند انقطاع الاتصال.
 
-## Setup
-1. Create a **public** GitHub repo `leb4tech-mobile-prices` in your GitHub account, and upload this project's contents (including `.github`). Do not publish private credentials.
-2. In GitHub, open **Actions** > **Update Lebanon phone prices** > **Run workflow**. Allow Actions to write repo content: Settings > Actions > General > Workflow permissions > **Read and write permissions**, if needed.
-3. Inspect the workflow logs and `data/phones.json`. The importer deliberately rejects ambiguous/used/bundled phones and requires at least two independent matched store offers. If none can be matched, the workflow fails and retains the previous feed; **don't loosen matching blindly**.
-4. Update `USERNAME` in `blogger/page.html` to the actual GitHub username; change the repository portion if you used a different repo name.
-5. In Blogger: Pages > New page > switch to HTML view; paste the entire `blogger/page.html` code and publish. Check Blogger theme and CSP/custom JS compatibility.
-6. Check data feed in browser: `https://cdn.jsdelivr.net/gh/USERNAME/leb4tech-mobile-prices@main/data/phones.json`.
+**الحالة الحالية:** البنية والواجهة والجمع المجدول والاختبارات منفذة. لم يُفعّل أي متجر لأن شبكة البيئة منعت فحص المصادر المرشحة؛ ملف الأسعار فارغ وصحيح بنيويًا، ولا توجد أسعار أو مواصفات مخترعة. لم ننشر الموقع أو نشغّل Actions عن بُعد. التفاصيل وروابط الفحص في [توثيق المصادر](docs/sources.md).
 
-## Important cautions
-- This is a starter, **not** a confirmed live price service. Shopify public `/products.json` availability and catalog completeness may change. Sites can block requests; do not bypass or ignore robots/terms. Seek permissions/API access where necessary.
-- No invented phone prices or detailed specs. RAM/storage shown only if explicit in the listing. A missing spec means *unknown*, not zero.
-- All input must actually be priced in USD. Shopify `products.json` often represents shop-currency values; **verify each store's actual catalog currency** before enabling live publishing. If a store uses non-USD currency, disable it until an approved conversion mechanism is implemented.
-- Different warranty/region conditions may affect price comparability. Current heuristic excludes clearly marked conditions but cannot guarantee every listing is equivalent. Review mappings on first deployment; consider a manually approved matching registry for production.
-- `?variant=` links may become invalid if a store changes their product variants; preserve product pages for checking.
-- If two stores quote the same price, both count; if one store lists multiple colors/copies of a variant, only its cheapest qualifying offer is used (bias noted). A more rigorous version should select canonical price within store after checking colors.
-- In GitHub Actions, published JSON is updated only after successful fetching and matching. If zero matches, previous file remains unchanged. Show `generated_at` so users can see stale pricing.
-- Some static CDN endpoints may cache; Blogger includes a 1-hour refresh key. Changes can propagate with delay.
+## الملفات
 
-## Codex development brief
-Improve this project without sacrificing strict matching. Add shop-specific product feed adapters where permitted; explicit currency verification, category phone-only filtering, per-variant warranty/state matching, stronger normalization and alias table, freshness cutoff, source health report, fixtures/tests, and a manual review list for uncertain variants. Keep the public JSON schema backwards-compatible and page language Arabic, phone names English. Do not invent missing specs or prices. Never bypass rate limits, protection, or access restrictions.
+| المسار | الوظيفة |
+| --- | --- |
+| `index.html`, `assets/` | واجهة مستقلة ومتجاوبة بلا مكتبات خارجية |
+| `blogger/page.html` | مقطع HTML/CSS/JavaScript مستقل لنسخه إلى Blogger، بتنسيق معزول تحت `.lb4t` |
+| `data/phones.json` | قاعدة البيانات المعتمدة؛ `phones: []` حتى توفر أدلة حقيقية |
+| `data/status.json` | وقت آخر محاولة وحالة المصادر، منفصل عن تاريخ نجاح الأسعار |
+| `schemas/phones.schema.json` | مخطط JSON Schema 2020-12 للبيانات العامة |
+| `schemas/sources.schema.json` | مخطط إعداد المصادر والمنتجات المراجعة |
+| `config/sources.json` | المصادر المفعلة؛ فارغ افتراضيًا |
+| `price_index/sources.py` | قارئ صفحات المنتجات العامة JSON-LD وضوابط الاتصال والإذن |
+| `price_index/market.py` | التحقق من العروض وحساب المتوسط الحسابي |
+| `price_index/dataset.py` | تحقق بنيوي ودلالي وحفظ ذري للملف |
+| `price_index/refresh.py` | جمع المصادر ومطابقة النسخ وتحديث آخر بيانات سليمة |
+| `scripts/build.py` | توليد `index.html` ومقطع Blogger ومجلد النشر `site/` |
+| `scripts/check_public_url.py` | اختبار رابط JSON العام وCORS بعد النشر |
+| `.github/workflows/` | اختبارات وتحديث الأسعار كل 6 ساعات ونشر GitHub Pages |
+| `tests/` | اختبارات حسابات وجمع وحفظ ذري وواجهة Chromium وCORS |
 
-## Run locally
-```bash
-python -m pip install -r requirements.txt
-python -m unittest discover -s tests -v
-python scripts/build_feed.py
+## التشغيل المحلي
+
+يلزم Python 3.12 أو أحدث:
+
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+python -m playwright install --with-deps chromium
+python -m scripts.validate
+python -m scripts.build
+python -m http.server 8000 --bind 127.0.0.1
 ```
+
+افتح الصفحة محليًا من خادم HTTP، وليس من `file://` لأن تحميل JSON يحتاج HTTP. لتشغيل الاختبارات:
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+في البيئة الحالية يوجد Chromium جاهز، ويمكن استخدام:
+
+```sh
+CHROMIUM_PATH=/usr/bin/chromium python3 -m unittest discover -s tests -v
+```
+
+تشغيل تحديث يدوي محلي:
+
+```sh
+python -m price_index.refresh
+python -m scripts.validate
+```
+
+عندما لا توجد مصادر مفعلة، تكون النتيجة `not_configured`، ولا يتغير ملف الأسعار أو تاريخ نجاحه. الاختبارات تستخدم منتجات اصطناعية داخل الذاكرة ومجلدات مؤقتة فقط؛ لا تنشرها كبيانات حقيقية.
+
+## قواعد صحة البيانات
+
+- كل هاتف له شركة وموديل إنجليزيان وسعة وRAM أو `null` إن كانت غير موثقة، وSIM وضمان وحالة ومواصفات موثقة اختيارية، وصورة اختيارية بإذن استخدام. النصوص الوصفية التي تظهر للزوار تُكتب بالعربية، مع إبقاء المصطلحات التقنية اللازمة.
+- هوية النسخة تشمل الشركة والموديل والسعة وRAM وSIM والضمان والحالة. المطابقة صريحة وليست تشابهًا تقريبيًا للأسماء. النسخ المختلفة لا تُدمج.
+- يجب أن يكون العرض USD ومتوفرًا صراحةً، وسعره رقمًا موجبًا محدودًا، ومن مصدر لبناني تمت مراجعته. لا تحويل عملات ولا توليد مواصفات أو أسعار بالذكاء الاصطناعي.
+- يلزم متجران مستقلان على الأقل للمتوسط. تُرفض مساهمة مكررة لنفس المالك أو المتجر أو النطاق. المتوسط الحسابي يُحسب بـDecimal ويُقرب مرة واحدة إلى سنتين عشريتين.
+- عرض واحد يمكن أن يظهر بحالة `insufficient_data` و`average_usd: null`، ولا يُعرض كسعر سوق. لا يستبدل متوسطًا موثقًا محفوظًا بعرض منفرد.
+- حقول المنتجات الأساسية غير المعروفة تمنع إدراجها. المراجعة اليدوية مطلوبة لإثبات استقلال المالك وإذن المصدر وصحة ربط SKU؛ المخطط وحده لا يثبت ذلك.
+- العروض التي عمرها 6 ساعات أو أكثر أو ذات وقت مستقبلي لا تدخل متوسطًا جديدًا. تبقى السجلات التاريخية سليمة لكن تُعرض بتحذير واضح، مع تاريخها الأصلي بتوقيت بيروت.
+- فشل أي مصدر يلغي تحديث أسعار التشغيل كله، ويحفظ آخر ملف سليم دون تغيير. يسجل السبب الآمن في `status.json` وسجلات التنفيذ، ولا يطبع محتوى استجابات أو أسرارًا. نقص الأدلة في نسخة لا يُعالَج باختراع سعر.
+- لا يُحذف سجل تاريخي تلقائيًا عند اختفائه من نتيجة المصدر؛ يبقى بتاريخ تحقق قديم وتحذير، ولا يُعتبر تحققًا جديدًا من التوفر. السعر المعروض هو سعر المنتج المنشور وليس بالضرورة السعر النهائي مع الشحن أو الضرائب.
+
+## تشغيل GitHub Actions
+
+1. ارفع التغييرات إلى الفرع الافتراضي للمستودع، وفعّل Actions إن كانت معطلة.
+2. من **Settings → Actions → General → Workflow permissions** اسمح بكتابة محتويات المستودع لعملية تحديث البيانات عند الحاجة. لا حاجة لأي مفتاح Gemini أو API مفترض.
+3. أكمل مراجعة المصادر وفق `docs/sources.md` ثم أضفها إلى الإعداد. التشغيل دون مصادر آمن ولكنه لا ينتج أسعارًا.
+4. من **Actions → Refresh verified prices → Run workflow** شغّل تحديثًا يدويًا. تعمل الجدولة أيضًا كل 6 ساعات وفق `0 */6 * * *` بتوقيت UTC؛ جدولة GitHub بأفضل جهد وقد تتأخر، وقد تتوقف للمستودعات العامة غير النشطة وفق سياسة GitHub.
+5. تنفذ العملية اختبارات المنطق والمخطط ثم الجمع والتحقق، وتحفظ فقط ملفات `data/`. فشل المصدر يحتفظ بملف الأسعار السابق ويسمح بتسجيل تقرير الحالة، ثم يميز التشغيل كفاشل. توجد نسخة التقرير في Artifact باسم `source-status` لمدة 14 يومًا.
+6. العمليات متسلسلة لمنع التداخل، وGit push عادي بلا force؛ إذا تغير الفرع أثناء التشغيل يُرفض الدفع بدل الكتابة فوقه. قواعد حماية الفرع قد تتطلب مسار PR أو تعديل صلاحيات مناسب؛ لا يتجاوزها المشروع.
+7. **Validate application** يشغّل المجموعة الكاملة واختبارات المتصفح عند push وPR، ويتأكد أن الملفات المولدة مطابقة للمصادر. بعد تعديل الواجهة، نفذ `python -m scripts.build` واحفظ الملفات المولدة مع التعديل.
+
+## نشر البيانات وربط Blogger
+
+لم يتم النشر من هذه الجلسة. يوجد Workflow جاهز للنشر عند اختيارك تفعيله:
+
+1. من **Settings → Pages → Build and deployment** اختر **GitHub Actions**. تأكد أن خطة GitHub وصلاحيات المستودع تسمحان بصفحة عامة؛ يمكن أن يكون المستودع خاصًا لكن رابط البيانات يجب أن يكون عامًا بلا تسجيل دخول.
+2. شغّل **Publish static index** يدويًا من Actions. يتابع أيضًا اكتمال تحديث الأسعار لنشر آخر البيانات السليمة وتقرير الحالة، حتى عند فشل الجمع. يعيد التحقق من ملف الأسعار قبل النشر.
+3. استخدم رابط Pages الذي تعيده عملية النشر. للمستودع `leb4tech/mobileprice` يكون المسار المتوقع بعد التفعيل `https://leb4tech.github.io/mobileprice/data/phones.json`، أو نفس المسار على النطاق المخصص الذي تختاره. وجود هذا النص في المشروع لا يعني أن الرابط منشور حاليًا.
+4. تحقق فعليًا من وصول JSON دون تسجيل دخول ومن CORS من أصل مدونتك:
+
+```sh
+python -m scripts.check_public_url https://leb4tech.github.io/mobileprice/data/phones.json --origin https://YOUR-BLOG.blogspot.com
+```
+
+استبدل الأصل بعنوان Blogger الحقيقي. الأداة تتطلب `Access-Control-Allow-Origin: *` أو أصل المدونة، وتتحقق من المخطط والمتوسطات. اختبر أيضًا من متصفح غير مسجل الدخول، خصوصًا إذا كانت بيئتك تحقن مصادقة تلقائية. لا تستخدم روابط `github.com/.../blob/...` لأنها صفحات HTML.
+
+5. إذا لم تسمح استضافتك بـCORS، انشر مجلد `site/` على استضافة ثابتة تسمح بضبط الرؤوس مثل Cloudflare Pages. ملف `_headers` المولد يحدد CORS لملفات `/data/*` في الاستضافات التي تدعمه. GitHub Pages لا يقرأ `_headers`؛ لذلك يلزم اختبار رؤوسه الفعلية بعد النشر. لا يوجد proxy للتحايل على قيود متجر.
+6. في Blogger أنشئ صفحة، وانتقل إلى **عرض HTML**، ثم انسخ محتوى `blogger/page.html` كاملًا. غيّر قيمة `data-url` في أول عنصر `<section>` إلى رابط JSON العام المؤكد. انشر الصفحة واختبرها من الهاتف والكمبيوتر.
+7. ضع `status.json` في المجلد نفسه بجوار `phones.json` لكي تظهر حالة المصادر. تمنع الواجهة إرسال cookies أو Authorization إلى رابط البيانات. تحتاج صور الهواتف إلى HTTPS وإذن استخدام، ولا يُعرض بديل وهمي عند غيابها.
+8. الواجهة تخزن آخر نسخة صحيحة في localStorage إن سمح المتصفح، وتستعملها عند فشل التحميل مع تنبيه وتاريخها الأصلي. أول زيارة بلا بيانات أو ذاكرة محفوظة تعرض رسالة تعذر التحميل. حافظ على الملفات السابقة في الاستضافة عند فشل البناء أو التحديث.
+
+## الصيانة
+
+راجع شروط كل مصدر وربط المنتجات مرة كل 30 يومًا على الأكثر، وبوتيرة أقصر إن اشترط المتجر. لا تفعّل مصدرًا قبل تحقق يدوي من الإذن والعملة والتوفر والنسخة والضمان. راقب سجل Actions وتقارير الفشل، وأضف اختبارات لاستجابات المصدر بعد إزالة أي معلومات حساسة.
+
+كان الملف الأصلي يحتوي مفتاح Gemini مكشوفًا؛ أُزيل من الواجهة، لكنه قد يبقى في سجل Git. ألغِه أو غيّره لدى مزوده. لا تضع أسرارًا جديدة في إعدادات JSON أو صفحات Blogger.
