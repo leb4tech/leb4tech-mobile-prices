@@ -5,23 +5,29 @@
   const $ = selector => root.querySelector(selector);
   const status = $('.notice'), grid = $('.grid'), summary = $('.summary');
   const input = $('#phone-input'), brand = $('#brand-filter'), maxPrice = $('#price-filter');
+  const markets = {US:'الولايات المتحدة',LB:'لبنان',GB:'المملكة المتحدة',CA:'كندا',DE:'ألمانيا',AE:'الإمارات',AU:'أستراليا',JP:'اليابان',FR:'فرنسا'};
+  const market = $('#market-filter');
+  const displayedPrice = p => p.average_usd !== null ? p.average_usd : data?.schema_version === 2 && p.offers.length === 1 ? p.offers[0].price_usd : null;
   const SIX_HOURS = 6 * 60 * 60 * 1000;
   const conditions = {new:'جديد',used:'مستعمل',refurbished:'مجدّد'};
   let data = null, cached = false;
   const endpoint = root.dataset.url;
-  const cacheKey = 'leb4tech-prices-v1:' + endpoint;
+  const cacheKey = 'leb4tech-prices-v2:' + endpoint;
   const validDate = value => typeof value === 'string' && /(?:Z|[+-]\d{2}:\d{2})$/.test(value) && Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now();
   function https(value) {
     try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password; } catch { return false; }
   }
   function validate(value) {
-    if (!value || value.schema_version !== 1 || !Array.isArray(value.phones) || value.phones.length > 10000) throw Error('schema');
+    if (!value || ![1,2].includes(value.schema_version) || !Array.isArray(value.phones) || value.phones.length > 10000) throw Error('schema');
+    const international = value.schema_version === 2;
+    if (international && (value.pricing_basis !== 'international_retail' || value.currency !== 'USD')) throw Error('basis');
     if (value.updated_at !== null && !validDate(value.updated_at)) throw Error('date');
     const ids = new Set(), variants = new Set();
     value.phones.forEach(p => {
       if (!p || typeof p.id !== 'string' || !/^[a-f0-9]{24}$/.test(p.id) || ids.has(p.id)) throw Error('id');
       ids.add(p.id);
-      const variant = JSON.stringify([p.brand,p.model,p.storage_gb,p.ram_gb,p.sim,p.warranty,p.condition]);
+      if (international && !Object.hasOwn(markets,p.market)) throw Error('market');
+      const variant = JSON.stringify([p.brand,p.model,p.storage_gb,p.ram_gb,p.sim,p.warranty,p.condition,p.market]);
       if (variants.has(variant)) throw Error('duplicate'); variants.add(variant);
       if (![p.brand,p.model].every(v => typeof v === 'string' && /^[A-Za-z0-9][A-Za-z0-9 .+()/-]*$/.test(v))) throw Error('name');
       if (!Number.isInteger(p.storage_gb) || p.storage_gb <= 0 || !(p.ram_gb === null || Number.isInteger(p.ram_gb) && p.ram_gb > 0)) throw Error('storage');
@@ -31,6 +37,7 @@
       if (!validDate(p.updated_at) || !Array.isArray(p.offers) || !p.offers.length) throw Error('offers');
       const owners = new Set(), stores = new Set(), hosts = new Set();
       p.offers.forEach(o => {
+        if (international && o.country !== p.market) throw Error('market');
         if (!o || ![o.owner,o.store].every(v => typeof v === 'string' && v.trim()) || !https(o.url) || o.currency !== 'USD' || o.available !== true || o.condition !== p.condition || !Number.isFinite(o.price_usd) || o.price_usd <= 0 || o.observed_at !== p.updated_at) throw Error('offer');
         const owner = o.owner.trim().toLowerCase(), store = o.store.trim().toLowerCase(), host = new URL(o.url).hostname;
         if (owners.has(owner) || stores.has(store) || hosts.has(host)) throw Error('independence');
@@ -58,9 +65,9 @@
     grid.replaceChildren();
     const query = input.value.trim().toLowerCase();
     const ceiling = maxPrice.value === '' ? Infinity : Number(maxPrice.value);
-    const phones = data.phones.filter(p => (p.brand + ' ' + p.model).toLowerCase().includes(query) && (!brand.value || p.brand === brand.value) && (ceiling === Infinity || p.average_usd !== null && p.average_usd <= ceiling));
+    const phones = data.phones.filter(p => (p.brand + ' ' + p.model).toLowerCase().includes(query) && (!brand.value || p.brand === brand.value) && (!market?.value || p.market === market.value) && (ceiling === Infinity || displayedPrice(p) !== null && displayedPrice(p) <= ceiling));
     summary.textContent = 'عدد النتائج: ' + phones.length;
-    if (!data.phones.length) message((cached ? 'تعذّر تحميل البيانات الحديثة؛ نعرض آخر نسخة محفوظة. ' : '') + 'لا تتوفر أسعار موثّقة حالياً. لن نعرض أسعاراً أو مواصفات تقديرية.');
+    if (!data.phones.length) message((cached ? 'تعذّر تحميل البيانات الحديثة؛ نعرض آخر نسخة محفوظة. ' : '') + 'لم تتوفر عروض عالمية موثقة بعد. ستظهر الأسعار بعد تفعيل المصادر والتحقق من النسخ.');
     else {
       const stale = data.phones.some(p => Date.now() - Date.parse(p.updated_at) >= SIX_HOURS);
       message((cached ? 'تعذّر تحميل البيانات الحديثة؛ نعرض آخر نسخة محفوظة. ' : '') + (stale ? 'تنبيه: تتضمن القائمة أسعاراً قديمة؛ تحقّق من المتجر قبل الشراء. ' : '') + 'آخر تحديث ناجح: ' + date(data.updated_at));
@@ -74,12 +81,13 @@
         image.addEventListener('error',() => image.remove()); card.append(image);
       }
       card.append(element('div',`${p.storage_gb} GB · RAM: ${p.ram_gb === null ? 'غير موثّقة' : p.ram_gb + ' GB'}`));
+      if (data.schema_version === 2) card.append(element('div','السوق: ' + markets[p.market],'badge'));
       card.append(element('div','النسخة: ' + p.sim + ' · الحالة: ' + conditions[p.condition]));
       card.append(element('div','الضمان: ' + p.warranty,'muted'));
       const old = Date.now() - Date.parse(p.updated_at) >= SIX_HOURS;
-      card.append(element('span',old ? 'سعر قديم' : p.status === 'verified' ? 'متوسط موثّق' : 'مصادر غير كافية','badge'));
-      card.append(element('p',p.average_usd === null ? 'لا يتوفر متوسط موثوق' : new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(p.average_usd),'price'));
-      card.append(element('p',p.average_usd === null ? 'يلزم متجران مستقلان للنسخة نفسها.' : 'متوسط حسابي من ' + p.offers.length + ' متاجر مستقلة.','muted'));
+      card.append(element('span',old ? 'سعر قديم' : p.status === 'verified' ? 'متوسط عروض متاجر' : data.schema_version === 2 ? 'سعر متجر واحد' : 'مصادر غير كافية','badge'));
+      card.append(element('p',displayedPrice(p) === null ? 'لا يتوفر متوسط موثوق' : '≈ ' + new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(displayedPrice(p)),'price'));
+      card.append(element('p',p.average_usd === null ? (data.schema_version === 2 ? 'عرض مباشر من متجر واحد؛ ليس متوسط سوق. الشحن والضرائب تحتاج تحقق.' : 'يلزم متجران مستقلان للنسخة نفسها.') : 'متوسط حسابي من ' + p.offers.length + ' متاجر مستقلة.','muted'));
       if (p.specs.length) { const ul = element('ul'); p.specs.forEach(s => ul.append(element('li',s))); card.append(ul); }
       const time = element('time','آخر تحقق: ' + date(p.updated_at)); time.dateTime = p.updated_at; card.append(time);
       const details = element('details'); details.append(element('summary','المصادر والأسعار'));
@@ -112,6 +120,11 @@
     if (data) {
       const selected = brand.value; brand.replaceChildren(element('option','كل الشركات')); brand.firstChild.value = '';
       [...new Set(data.phones.map(p => p.brand))].sort().forEach(name => { const opt = element('option',name); opt.value = name; brand.append(opt); }); brand.value = selected;
+      if (market) {
+        const selectedMarket = market.value; market.replaceChildren(element('option','كل الأسواق')); market.firstChild.value = '';
+        [...new Set(data.phones.map(p => p.market).filter(Boolean))].sort().forEach(code => {const opt = element('option',markets[code]); opt.value = code; market.append(opt);});
+        market.value = selectedMarket;
+      }
       render();
     }
     try {
@@ -119,6 +132,7 @@
       $('.source-status').textContent = Array.isArray(report.failures) && report.failures.length ? 'تعذّر تحديث بعض المصادر؛ قد تبقى الأسعار السابقة مع تاريخها الأصلي.' : report.state === 'not_configured' ? 'مصادر الأسعار قيد المراجعة ولم تُفعّل بعد.' : '';
     } catch { $('.source-status').textContent = 'تقرير حالة المصادر غير متاح.'; }
   }
+  market?.addEventListener('change',render);
   input.addEventListener('input',render); brand.addEventListener('change',render); maxPrice.addEventListener('input',render);
   $('#search-btn').addEventListener('click',render); $('.reload').addEventListener('click',load);
   setInterval(render,60000);

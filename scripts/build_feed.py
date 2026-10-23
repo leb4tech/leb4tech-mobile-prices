@@ -19,7 +19,7 @@ from price_index.refresh import refresh
 def build():
     return refresh(
         config_path=ROOT / 'config/sources.json',
-        data_path=ROOT / 'data/phones.json',
+        data_path=ROOT / 'data/global-phones.json',
         report_path=ROOT / 'data/status.json',
     )
 

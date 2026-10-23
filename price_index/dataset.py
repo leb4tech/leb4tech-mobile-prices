@@ -18,6 +18,7 @@ def timestamp(value):
 
 def variant_id(phone):
     fields = ['brand','model','storage_gb','ram_gb','sim','warranty','condition']
+    if 'market' in phone:fields.append('market')
     raw = json.dumps([phone[k] for k in fields],ensure_ascii=False,separators=(',',':'))
     return hashlib.sha256(raw.encode()).hexdigest()[:24]
 
@@ -40,6 +41,8 @@ def validate_dataset(data, now=None):
         if len(set(hosts)) != len(hosts) or any(not h for h in hosts):
             raise ValueError('duplicate or missing host')
         for offer in offers:
+            if data['schema_version']==2 and offer['country'] != phone['market']:
+                raise ValueError('offer market mismatch')
             if not Decimal(str(offer['price_usd'])).is_finite():
                 raise ValueError('non-finite price')
             if offer['condition'] != phone['condition'] or timestamp(offer['observed_at']) > now:

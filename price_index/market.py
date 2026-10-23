@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 
 LOG = logging.getLogger(__name__)
 MAX_AGE = timedelta(hours=6)
+COUNTRIES = {'US','LB','GB','CA','DE','AE','AU','JP','FR'}
 
 
 @dataclass(frozen=True)
@@ -47,8 +48,8 @@ def validate(offer: Offer, now: datetime):
     source = offer.source
     if not all(isinstance(v, str) and v.strip() for v in (
         source.store, source.independent_owner, source.host, source.permission_reference
-    )) or source.country != 'LB':
-        raise ValueError('unverified Lebanese source or missing access permission')
+    )) or source.country not in COUNTRIES:
+        raise ValueError('unsupported source country or missing access permission')
     url = urlsplit(offer.url)
     if (url.scheme != 'https' or url.hostname != source.host or url.username
             or url.password or url.port not in (None, 443) or not url.path):
@@ -84,6 +85,8 @@ def market_average(offers, now=None):
         validate(offer, now)
     if len(offers) < 2:
         raise ValueError('at least two independent stores required')
+    if len({o.source.country for o in offers}) != 1:
+        raise ValueError('different markets cannot share an average')
     if len({o.variant for o in offers}) != 1:
         raise ValueError('model, storage, SIM, warranty or condition mismatch')
     owners = {o.source.independent_owner.casefold().strip() for o in offers}

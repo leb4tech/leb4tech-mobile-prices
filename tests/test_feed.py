@@ -12,7 +12,7 @@ class FeedTests(unittest.TestCase):
             self.assertEqual(build_feed.build(), expected)
         kwargs = refresh.call_args.kwargs
         self.assertEqual(kwargs['config_path'], build_feed.ROOT / 'config/sources.json')
-        self.assertEqual(kwargs['data_path'], build_feed.ROOT / 'data/phones.json')
+        self.assertEqual(kwargs['data_path'], build_feed.ROOT / 'data/global-phones.json')
         self.assertEqual(kwargs['report_path'], build_feed.ROOT / 'data/status.json')
         self.assertTrue(all(Path(path).is_absolute() for path in kwargs.values()))
 

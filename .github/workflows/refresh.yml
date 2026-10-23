@@ -24,16 +24,17 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_market.py' -v
       - run: python -m unittest discover -s tests -p 'test_pipeline.py' -v
       - run: python -m unittest discover -s tests -p 'test_feed.py' -v
+      - run: python -m unittest discover -s tests -p 'test_international.py' -v
       - run: python -m price_index.refresh
         id: collect
         continue-on-error: true
       - run: python -m scripts.validate
       - name: Commit validated data only
         run: |
-          if ! git diff --quiet -- data/phones.json data/status.json; then
+          if ! git diff --quiet -- data/global-phones.json data/status.json; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add data/phones.json data/status.json
+            git add data/global-phones.json data/status.json
             git commit -m 'Update verified price index and source status'
             git push
           fi

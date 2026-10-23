@@ -48,10 +48,10 @@ class BrowserTests(unittest.TestCase):
         page=self.browser.new_page(viewport={'width':width,'height':844})
         self.addCleanup(page.close)
         if dataset is not None:
-            page.route('**/data/phones.json',lambda route:route.fulfill(json=dataset,headers={'Access-Control-Allow-Origin':'*'}))
+            page.route('**/data/global-phones.json',lambda route:route.fulfill(json=dataset,headers={'Access-Control-Allow-Origin':'*'}))
         url=f'http://127.0.0.1:{self.server.server_port}/'
         if blogger:
-            fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/phones.json',url+'data/phones.json')
+            fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/global-phones.json',url+'data/global-phones.json')
             page.route('**/embed-test',lambda route:route.fulfill(content_type='text/html',body='<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><h1 id="blog-title">عنوان المدونة</h1>'+fragment+'</body></html>'))
             url+='embed-test'
         response=page.goto(url);self.assertEqual(response.status,200)
@@ -75,7 +75,7 @@ class BrowserTests(unittest.TestCase):
         page.locator('#brand-filter').select_option('Fixture');self.assertEqual(page.locator('article').count(),1)
     def test_empty_and_single_source_never_invent_average(self):
         page=self.page(dataset=EMPTY)
-        self.assertIn('لا تتوفر أسعار موثّقة',page.get_by_role('status').inner_text())
+        self.assertIn('لم تتوفر عروض عالمية موثقة',page.get_by_role('status').inner_text())
         page=self.page(dataset=self.dataset(single=True))
         self.assertIn('لا يتوفر متوسط',page.locator('.price').inner_text())
     def test_stale_warning_and_last_update(self):
@@ -85,8 +85,8 @@ class BrowserTests(unittest.TestCase):
         self.assertIn('آخر تحقق',page.locator('time').inner_text())
     def test_cache_survives_network_failure(self):
         page=self.page(dataset=self.dataset())
-        page.unroute('**/data/phones.json')
-        page.route('**/data/phones.json',lambda route:route.abort())
+        page.unroute('**/data/global-phones.json')
+        page.route('**/data/global-phones.json',lambda route:route.abort())
         page.reload();page.wait_for_function("!document.querySelector('.reload').disabled")
         self.assertIn('آخر نسخة محفوظة',page.get_by_role('status').inner_text())
         self.assertEqual(page.locator('article').count(),1)
@@ -128,10 +128,43 @@ class BrowserTests(unittest.TestCase):
             for allowed in (True,False):
                 CorsHandler.allow=allowed
                 page=self.browser.new_page();self.addCleanup(page.close)
-                fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/phones.json',f'http://127.0.0.1:{server.server_port}/data/phones.json')
+                fragment=(ROOT/'blogger/page.html').read_text().replace('https://leb4tech.github.io/leb4tech-mobile-prices/data/global-phones.json',f'http://127.0.0.1:{server.server_port}/data/global-phones.json')
                 QuietHandler.cors_page='<!DOCTYPE html><meta charset="utf-8">'+fragment
                 page.goto(f'http://127.0.0.1:{self.server.server_port}/cors-test')
                 page.wait_for_function("!document.querySelector('.reload').disabled")
                 self.assertEqual(page.locator('article').count(),1 if allowed else 0)
         finally:
             server.shutdown();server.server_close();thread.join()
+
+    def international_dataset(self,single=False,second_market=False):
+        from test_international import EMPTY as GLOBAL_EMPTY
+        now=datetime.now(timezone.utc)-timedelta(seconds=2)
+        a=replace(SOURCE,country='US')
+        b=Source('Fixture B','owner-b','b.example','https://b.example/permission','CA' if second_market else 'US')
+        batches=[(PRODUCT,replace(offer(a,'100'),observed_at=now))]
+        if not single:batches.append((PRODUCT,replace(offer(b,'200'),observed_at=now)))
+        return build(GLOBAL_EMPTY,batches,now)[0]
+
+    def test_international_single_store_is_visible_and_filterable(self):
+        page=self.page(dataset=self.international_dataset(single=True),blogger=True)
+        self.assertIn('$100.00',page.locator('.price').inner_text())
+        self.assertIn('سعر متجر واحد',page.locator('article').inner_text())
+        self.assertIn('ليس متوسط سوق',page.locator('article').inner_text())
+        self.assertIn('الولايات المتحدة',page.locator('article').inner_text())
+        page.locator('#price-filter').fill('99')
+        self.assertEqual(page.locator('article').count(),0)
+
+    def test_international_market_filter_and_duplicate_models(self):
+        page=self.page(dataset=self.international_dataset(second_market=True),blogger=True)
+        self.assertEqual(page.locator('article').count(),2)
+        page.locator('#market-filter').select_option('CA')
+        self.assertEqual(page.locator('article').count(),1)
+        self.assertIn('كندا',page.locator('article').inner_text())
+        self.assertIn('$200.00',page.locator('.price').inner_text())
+
+    def test_international_offer_country_mismatch_is_rejected(self):
+        data=self.international_dataset(single=True)
+        data['phones'][0]['offers'][0]['country']='CA'
+        page=self.page(dataset=data)
+        self.assertEqual(page.locator('article').count(),0)
+        self.assertIn('تعذّر تحميل',page.get_by_role('status').inner_text())

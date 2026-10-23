@@ -12,12 +12,16 @@ LOG=logging.getLogger(__name__)
 
 def build(previous,batches,now):
     validate_dataset(previous,now)
+    international=previous['schema_version']==2
     grouped={}
     for product,offer in batches:
         validate(offer,now)
+        if not international and offer.source.country!='LB':
+            raise ValueError('international offers require schema version 2')
         if any(product[k] != getattr(offer,k) for k in ('model','storage_gb','sim','warranty','condition')):
             raise ValueError('offer and reviewed variant mismatch')
         phone={k:product[k] for k in ('brand','model','storage_gb','ram_gb','sim','warranty','condition','specs','image')}
+        if international:phone['market']=offer.source.country
         key=variant_id(phone)
         if key not in grouped:grouped[key]=(phone,[])
         existing,offers=grouped[key]
@@ -32,22 +36,25 @@ def build(previous,batches,now):
         identities=[o.source.independent_owner.strip().casefold() for o in offers]
         if len(identities)!=len(set(identities)):raise ValueError('duplicate owner offers')
         avg=market_average(offers,now) if len(offers)>=2 else None
-        # Never replace an older verified average with a single-source result.
-        if key in merged and avg is None:continue
+        # Legacy clients require a quorum; international clients explicitly
+        # display current single-store quotes without calling them an average.
+        if key in merged and avg is None and not international:continue
         phone.update(id=key,average_usd=float(avg) if avg is not None else None,
                      status='verified' if avg is not None else 'insufficient_data',
                      updated_at=now.isoformat(),offers=[{
                          'store':o.source.store,'owner':o.source.independent_owner,
                          'url':o.url,'currency':'USD','price_usd':float(o.price),
-                         'available':True,'condition':o.condition,'observed_at':o.observed_at.isoformat()
+                         'available':True,'condition':o.condition,'observed_at':o.observed_at.isoformat(),
+                         **({'country':o.source.country} if international else {})
                      } for o in offers])
         merged[key]=phone
         updated+=1
     phones=sorted(merged.values(),key=lambda p:(p['brand'],p['model'],p['id']))
-    result={'schema_version':1,'updated_at':max((p['updated_at'] for p in phones),key=timestamp,default=None),'phones':phones}
+    result={'schema_version':previous['schema_version'],'updated_at':max((p['updated_at'] for p in phones),key=timestamp,default=None),'phones':phones}
+    if international:result.update(pricing_basis='international_retail',currency='USD')
     return validate_dataset(result,now),updated
 
-def refresh(config_path='config/sources.json',data_path='data/phones.json',report_path='data/status.json',factory=ProductPageAdapter,now=None):
+def refresh(config_path='config/sources.json',data_path='data/global-phones.json',report_path='data/status.json',factory=ProductPageAdapter,now=None):
     now=now or datetime.now(timezone.utc)
     previous=json.loads(Path(data_path).read_text())
     validate_dataset(previous,now)

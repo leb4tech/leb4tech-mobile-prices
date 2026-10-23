@@ -1,23 +1,29 @@
 name: Validate application
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    # The browser and OS dependencies are already installed in this official
+    # image. Keep the image version paired with requirements-dev.txt.
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.62.0-noble@sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pip
-      - run: python -m pip install -r requirements-dev.txt
-      - run: python -m playwright install --with-deps chromium
-      - run: python -m unittest discover -s tests -v
-      - run: python -m scripts.validate
-      - run: python -m scripts.build
-      - run: git diff --exit-code -- index.html blogger/page.html
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+        timeout-minutes: 5
+      - name: Run all tests including Chromium
+        run: python3 -m unittest discover -s tests -v
+        timeout-minutes: 5
+      - run: python3 -m scripts.validate
+      - run: python3 -m scripts.build
+      - run: git -c safe.directory="$GITHUB_WORKSPACE" diff --exit-code -- index.html blogger/page.html
